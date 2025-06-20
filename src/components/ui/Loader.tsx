@@ -2,32 +2,25 @@
 
 import React from 'react';
 
-interface LoaderProps {
-    size?: 'sm' | 'md' | 'lg' | 'xl';
-    color?: 'white' | 'gray' | 'indigo';
-}
-
-const Loader = ({ size = 'md', color = 'white' }: LoaderProps) => {
-    const sizeClasses = {
-        sm: 'h-4 w-4 border-2',
-        md: 'h-6 w-6 border-[3px]',
-        lg: 'h-8 w-8 border-4',
-        xl: 'h-10 w-10 border-[5px]'
-    };
-
-    const colorClasses = {
-        white: 'border-white border-t-transparent',
-        gray: 'border-gray-400 border-t-transparent',
-        indigo: 'border-indigo-500 border-t-transparent'
-    };
-
+const Loader = () => {
     return (
-        <div
-            aria-label="Loading..."
-            role="status"
-            className="flex items-center justify-center"
-        >
-            <div className={`rounded-full animate-spin ${sizeClasses[size]} ${colorClasses[color]}`} />
+        <div className="relative w-[24px] h-[24px]">
+            {[...Array(12)].map((_, i) => (
+                <div
+                    key={i}
+                    className="absolute w-[8%] h-[24%] bg-white left-1/2 top-[33%] opacity-0 rounded-full "
+                    style={{
+                        transform: `rotate(${i * 30}deg) translate(0, -130%)`,
+                        animation: `fade458 1s linear ${-(1.1 - (i * 0.1))}s infinite`,
+                    }}
+                />
+            ))}
+            <style jsx>{`
+        @keyframes fade458 {
+          from { opacity: 1; }
+          to { opacity: 0.25; }
+        }
+      `}</style>
         </div>
     );
 };
