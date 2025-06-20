@@ -88,7 +88,7 @@ export default function DownloadForm() {
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="https://www.instagram.com/reel/..."
-                  className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 dark:text-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 dark:text-white dark:bg-gray-700 shadow-sm placeholder:text-gray-400  sm:text-sm sm:leading-6"
                   required
                 />
               </div>
@@ -97,7 +97,7 @@ export default function DownloadForm() {
             <button
               type="submit"
               disabled={isLoading}
-              className="flex w-full justify-center cursor-pointer rounded-md bg-indigo-600 px-4 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+              className="flex w-full justify-center cursor-pointer rounded-md bg-indigo-600 px-4 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500  disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
             >
               {isLoading ? (
                 <span className="flex items-center gap-2">
