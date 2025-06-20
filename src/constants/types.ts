@@ -34,3 +34,11 @@ export interface Step {
     description: string;
     icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }
+export interface ReelData {
+    url: string;
+    title: string;
+    thumbnail: string;
+    profile_pic: string;
+    video_url: string;
+    description: string;
+}

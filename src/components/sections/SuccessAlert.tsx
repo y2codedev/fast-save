@@ -4,13 +4,11 @@ import React from 'react';
 interface SuccessAlertProps {
   message?: string;
   className?: string;
-  onRetry?: () => void;
 }
 
-export const SuccessAlert: React.FC<SuccessAlertProps> = ({ 
-  message = 'Your download will start shortly.', 
+export const SuccessAlert: React.FC<SuccessAlertProps> = ({
+  message = 'Your download will start shortly.',
   className = '',
-  onRetry 
 }) => {
   return (
     <div className={`rounded-md bg-green-50 dark:bg-green-900/20 p-4 ${className}`}>
@@ -23,16 +21,6 @@ export const SuccessAlert: React.FC<SuccessAlertProps> = ({
           <div className="mt-2 text-sm text-green-700 dark:text-green-300">
             <p>
               {message}
-              {onRetry && (
-                <>
-                  <button 
-                    onClick={onRetry}
-                    className="font-medium text-green-600 dark:text-green-400 hover:text-green-500 focus:outline-none"
-                  >
-                    click here
-                  </button>.
-                </>
-              )}
             </p>
           </div>
         </div>

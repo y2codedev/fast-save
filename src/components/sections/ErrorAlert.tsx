@@ -8,10 +8,10 @@ interface ErrorAlertProps {
 
 export const ErrorAlert: React.FC<ErrorAlertProps> = ({ error, className = '' }) => {
   return (
-    <div className={`rounded-md bg-red-50 dark:bg-red-900/20 p-4 ${className}`}>
+    <div className={`rounded-md bg-red-100 dark:bg-red-900/20 p-4 ${className}`}>
       <div className="flex">
         <div className="flex-shrink-0">
-          <ExclamationCircleIcon className="h-5 w-5 text-red-400 dark:text-red-300" aria-hidden="true" />
+          <ExclamationCircleIcon className="h-5 w-5 text-red-800 dark:text-red-500" aria-hidden="true" />
         </div>
         <div className="ml-3">
           <h3 className="text-sm font-medium text-red-800 dark:text-red-200">Error</h3>

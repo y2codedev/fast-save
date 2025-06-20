@@ -1,48 +1,71 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import CategoryNav from './CategoryNav'
-import { ErrorAlert, SuccessAlert } from '@/constants/index'
+import { useState, useEffect } from 'react';
+import CategoryNav from './CategoryNav';
+import { ErrorAlert, SuccessAlert } from '@/constants/index';
+import Loader from '../ui/Loader';
+import ReelResult from './ReelResult';
+
 export default function DownloadForm() {
-  const [url, setUrl] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState(false)
+  const [url, setUrl] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [downloadData, setDownloadData] = useState<any>(null);
+  const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => {
+        setSuccess(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError('')
-    setSuccess(false)
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
+    setSuccess(false);
 
     try {
-      const instagramRegex = /^https?:\/\/(www\.)?instagram\.com\/(reel|p)\/([A-Za-z0-9_-]+)\/?/
-      if (!instagramRegex.test(url)) {
-        throw new Error('Please enter a valid Instagram Reel URL')
+      const instagramReelRegex = /^https?:\/\/(www\.)?instagram\.com\/(reel|p)\/([A-Za-z0-9_-]+)\/?/;
+      if (!instagramReelRegex.test(url)) {
+        throw new Error('Please enter a valid Instagram Reel URL');
       }
 
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      // const response = await fetch('/api/download', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({ url }),
-      // })
-      // const data = await response.json()
+      const response = await fetch('/api/download', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url }),
+      });
 
-      setSuccess(true)
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to process video');
+      }
+
+      setDownloadData(data);
+      setSuccess(true);
+      setUrl('');
+      setError('');
+
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred')
+      console.error('Download error:', err);
+      setError(err instanceof Error ? err.message : 'Failed to fetch video. Please try again.');
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div id="download-section" className="bg-linear-to-t from-black-600 to-indigo-600 dark:bg-gray-900 py-4 px-4 sm:py-10">
       <CategoryNav />
-      <div className="mx-auto max-w-7xl pt-6 ">
+      <div className="mx-auto max-w-7xl pt-6">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-100 dark:text-black sm:text-4xl">
             Download Instagram Reels & Videos
@@ -65,32 +88,31 @@ export default function DownloadForm() {
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="https://www.instagram.com/reel/..."
-                  className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 dark:text-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-3 px-4 text-gray-900 dark:text-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   required
                 />
               </div>
             </div>
 
-            <div>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-4 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500  focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isLoading ? 'Processing...' : 'Download Now'}
-              </button>
-            </div>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="flex w-full justify-center cursor-pointer rounded-md bg-indigo-600 px-4 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+            >
+              {isLoading ? (
+                <span className="flex items-center gap-2">
+                  <Loader />
+                  Processing...
+                </span>
+              ) : 'Download Now'}
+            </button>
 
-            {error && (
-              <ErrorAlert error={error} className='' />
-            )}
-
-            {success && (
-              <SuccessAlert message='Download link will be available in few seconds' className='' />
-            )}
+            {error && <ErrorAlert error={error} />}
+            {success && <SuccessAlert message="Download successful!" />}
           </form>
+          {downloadData && <ReelResult data={downloadData} isSaving={isSaving} setIsSaving={setIsSaving} />}
         </div>
       </div>
     </div>
-  )
+  );
 }
