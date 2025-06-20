@@ -23,7 +23,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
     const handleDownload = async () => {
         try {
             setIsSaving(true);
-            const response = await fetch(data.video_url);
+            const response = await fetch(data?.video_url);
             const blob = await response.blob();
             const blobUrl = window.URL.createObjectURL(blob);
 
