@@ -3,7 +3,7 @@
 import { STEP } from "@/constants/socialLinks";
 export default function DownloadSteps() {
     return (
-        <div id="how-it-works" className="bg-gray-50 dark:bg-gray-900 rounded-xl py-24 sm:py-32">
+        <div id="how-it-works" className="bg-gray-50 dark:bg-gray-900 sm:rounded-xl rounded-none mx-auto  max-w-7xl   py-24 sm:py-32">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl lg:text-center">
                     <h2 className="text-base font-semibold leading-7 text-indigo-600">How it works</h2>

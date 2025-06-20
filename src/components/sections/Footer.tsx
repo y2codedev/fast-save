@@ -24,7 +24,7 @@ const Footer = ({
           </div>
 
           <div className="mt-6 flex justify-center md:mt-0 md:justify-end space-x-6">
-            {socialLinks?.map((social, index) => (
+            {socialLinks?.map((social) => (
               <Link
                 key={social?.id}
                 href={social?.href}

@@ -1,5 +1,25 @@
-import { FiGithub, FiTwitter, FiLinkedin, FiInstagram } from 'react-icons/fi';
-import { BoltIcon, DevicePhoneMobileIcon, LinkIcon, LockClosedIcon, ClipboardDocumentIcon, ArrowRightIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline'
+import {
+    FiGithub,
+    FiTwitter,
+    FiLinkedin,
+    FiInstagram
+} from 'react-icons/fi';
+import {
+    BoltIcon,
+    DevicePhoneMobileIcon,
+    LinkIcon,
+    LockClosedIcon,
+    ClipboardDocumentIcon,
+    ArrowRightIcon,
+    ArrowDownTrayIcon,
+    FilmIcon,
+    CameraIcon,
+    PhotoIcon,
+    SpeakerWaveIcon,
+    RectangleStackIcon,
+    PlayCircleIcon
+} from '@heroicons/react/24/outline'
+
 import type { Feature, LegalLink, SocialLink, Step } from './types';
 
 export const DEFAULT_SOCIAL_LINKS: SocialLink[] = [
@@ -103,3 +123,48 @@ export const STEP: Step[] = [
         icon: ArrowDownTrayIcon,
     },
 ]
+
+export const NAVITEMS: SocialLink[] = [
+    {
+        id: 1,
+        href: '/reels',
+        icon: FilmIcon,
+        ariaLabel: 'Reels',
+    },
+    {
+        id: 2,
+        href: '/pinterest',
+        icon: RectangleStackIcon,
+        ariaLabel: 'Pinterest',
+    },
+    {
+        id: 3,
+        href: '/video',
+        icon: PlayCircleIcon,
+        ariaLabel: 'Video',
+    },
+    {
+        id: 4,
+        href: '/audio',
+        icon: SpeakerWaveIcon,
+        ariaLabel: 'Audio',
+    },
+    {
+        id: 5,
+        href: '/photo',
+        icon: PhotoIcon,
+        ariaLabel: 'Photo',
+    },
+    {
+        id: 6,
+        href: '/stories',
+        icon: CameraIcon,
+        ariaLabel: 'Stories',
+    },
+    {
+        id: 7,
+        href: '/fb-video',
+        icon: PlayCircleIcon,
+        ariaLabel: 'FB Video',
+    },
+];
