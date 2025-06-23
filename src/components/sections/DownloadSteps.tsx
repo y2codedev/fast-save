@@ -17,7 +17,7 @@ export default function DownloadSteps() {
                 <div className="mt-16">
                     <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
                         {STEP?.map((step) => (
-                            <div key={step?.id} className="relative hover:bg-indigo-50 p-2 rounded-xl">
+                            <div key={step?.id} className="relative bg-white dark:bg-gray-800 p-2 rounded-xl">
                                 <div className="flex flex-col items-center text-center">
                                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-900/30">
                                         <step.icon className="h-6 w-6 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />

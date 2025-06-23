@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Suspense } from 'react';
 import { Navbar, Footer, Loader } from "@/constants";
+import { ThemeProvider } from 'next-themes'
 
 export const metadata: Metadata = {
   title: "Fast Save App",
@@ -14,14 +15,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <Navbar />
-        <Suspense fallback={<Loader />}>
-          {children}
-        </Suspense>
-        <Footer />
+        <ThemeProviderWrapper>
+          <Navbar />
+          <Suspense fallback={<Loader />}>
+            {children}
+          </Suspense>
+          <Footer />
+        </ThemeProviderWrapper>
       </body>
     </html>
   );
+}
+
+function ThemeProviderWrapper({ children }: { children: React.ReactNode }) {
+  return (
+     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      {children}
+    </ThemeProvider>
+  )
 }

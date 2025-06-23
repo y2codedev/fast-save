@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { FEATURES } from '@/constants';
 export default function HeroSection() {
   return (
-    <div className="bg-white dark:bg-gray-900 px-4">
+    <div className="bg-white dark:bg-gray-900 px-4 ">
       <div className="relative isolate">
         <div className="mx-auto max-w-6xl py-16 sm:py-24 lg:py-32">
           <div className="text-center">
@@ -31,7 +31,7 @@ export default function HeroSection() {
         <div className="mx-auto max-w-7xl  pb-24">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {FEATURES?.map((feature) => (
-              <div key={feature?.id} className="bg-gray-50 hover:bg-indigo-50 dark:bg-gray-800 p-6 rounded-xl">
+              <div key={feature?.id} className="bg-gray-50 hover:bg-indigo-50  dark:bg-gray-800 p-6 rounded-xl">
                 <div className="flex items-center mb-4">
                   <div className="flex-shrink-0 bg-indigo-100 dark:bg-indigo-900/30 p-2 rounded-lg">
                     <feature.icon className="h-6 w-6 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />

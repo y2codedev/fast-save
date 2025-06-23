@@ -13,7 +13,7 @@ export default function CategoryNav() {
                                     <span className="bg-gray-200 rounded-full  h-10 w-10 flex items-center justify-center">
                                         <item.icon className="w-5 h-5 stroke-2" />
                                     </span>
-                                    <span className=" text-gray-200 mt-2">
+                                    <span className=" text-gray-900 dark:text-white mt-2">
                                         {item?.ariaLabel}
                                     </span>
                                 </div>

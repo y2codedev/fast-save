@@ -60,14 +60,14 @@ export default function DownloadForm() {
   };
 
   return (
-    <div id="download-section" className="bg-linear-to-t from-black-600 to-indigo-600 dark:bg-gray-900 py-4 px-4 sm:py-10">
+    <div id="download-section" className="bg-white dark:bg-gray-900 py-4 px-4 sm:py-10">
       <CategoryNav />
-      <div className="mx-auto max-w-7xl pt-6">
+      <div className="mx-auto max-w-7xl pt-6 ">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-100 dark:text-black sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
             Download Instagram Reels & Videos
           </h2>
-          <p className="mt-6 text-lg leading-8 text-gray-200 dark:text-gray-300">
+          <p className="mt-6 text-lg leading-8 text-gray-900 dark:text-white">
             Paste your Instagram Reel URL below to download the video without watermark
           </p>
         </div>
@@ -85,7 +85,7 @@ export default function DownloadForm() {
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="https://www.instagram.com/reel/..."
-                  className="block w-full rounded-md border-2 border-gray-300 py-3 px-4 text-gray-900 dark:text-white dark:bg-gray-700 placeholder:text-gray-400 sm:text-sm sm:leading-6 focus:outline-none focus:border-indigo-600"
+                  className="block w-full rounded-md border-2 border-gray-300 py-3 bg-white dark:bg-white px-4 text-gray-900 dark:text-white  placeholder:text-gray-500 sm:text-sm sm:leading-6 focus:outline-none focus:border-indigo-600"
                 />
               </div>
             </div>
