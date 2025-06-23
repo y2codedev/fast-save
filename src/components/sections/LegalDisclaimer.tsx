@@ -2,7 +2,7 @@
 
 export default function LegalDisclaimer() {
   return (
-    <div className="bg-gray-50 dark:bg-gray-800 py-16  px-4  mx-auto  max-w-7xl sm:rounded-xl  pb-10  rounded-none sm:py-24">
+    <div className="bg-gray-50 dark:bg-gray-800 py-16  px-4 my-10  mx-auto  max-w-7xl sm:rounded-xl  pb-10  rounded-none sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Legal Disclaimer</h2>
