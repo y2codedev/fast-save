@@ -71,7 +71,7 @@ export default function DownloadForm() {
             Paste your Instagram Reel URL below to download the video without watermark
           </p>
         </div>
-        <div className="mx-auto mt-16 max-w-4xl rounded-3xl bg-gray-100 shadow-sm dark:bg-gray-800 p-6 sm:p-10">
+        <div className="mx-auto mt-16 max-w-4xl rounded-3xl bg-gray-50 shadow-sm dark:bg-gray-800 p-6 sm:p-10">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="url" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
