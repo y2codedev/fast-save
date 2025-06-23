@@ -16,7 +16,7 @@ const Navbar = () => {
             aria-label="FastSave Home"
           >
             <span className="text-xl font-bold text-gray-800 dark:text-gray-100">
-              Fast<span className="text-indigo-600 dark:text-indigo-400">Save</span>
+              Fast<span className="text-indigo-600 dark:text-indigo-600">Save</span>
             </span>
           </Link>
 
@@ -24,7 +24,7 @@ const Navbar = () => {
             <button
               type="button"
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 cursor-pointer "
+              className="p-2 rounded-full text-gray-700 dark:text-white hover:text-gray-900 dark:hover:text-white bg-gray-100 hover:bg-white dark:bg-gray-800  transition-all duration-200 cursor-pointer "
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
             >
               {theme === 'dark' ? (
@@ -36,7 +36,7 @@ const Navbar = () => {
 
             <button
               type="button"
-              className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 cursor-pointer "
+              className="p-2 rounded-full text-gray-700 dark:text-white hover:text-gray-900 dark:hover:text-white bg-gray-100 hover:bg-gray-100 dark:bg-gray-800  transition-all duration-200 cursor-pointer "
               aria-label="Share this page"
             >
               <FaShareAlt className="h-5 w-5" aria-hidden="true" />

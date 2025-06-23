@@ -3,7 +3,7 @@
 import { STEP } from "@/constants/socialLinks";
 export default function DownloadSteps() {
     return (
-        <div id="how-it-works" className="bg-gray-50 dark:bg-gray-900 sm:rounded-xl rounded-none mx-auto  max-w-7xl my-8   py-24 sm:py-32">
+        <div id="how-it-works" className="bg-gray-50 dark:bg-gray-800 sm:rounded-xl rounded-none mx-auto  max-w-7xl my-8   py-24 sm:py-32">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl lg:text-center">
                     <h2 className="text-base font-semibold leading-7 text-indigo-600">How it works</h2>
@@ -20,7 +20,7 @@ export default function DownloadSteps() {
                             <div key={step?.id} className="relative bg-white dark:bg-gray-800 p-2 rounded-xl">
                                 <div className="flex flex-col items-center text-center">
                                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-900/30">
-                                        <step.icon className="h-6 w-6 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
+                                        <step.icon className="h-6 w-6 text-indigo-600 dark:text-indigo-600" aria-hidden="true" />
                                     </div>
                                     <h3 className="mt-6 text-base font-semibold leading-7 text-gray-900 dark:text-white">
                                         <span className="absolute inset-0" />

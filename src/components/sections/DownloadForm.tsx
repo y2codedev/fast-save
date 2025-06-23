@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { ErrorAlert, SuccessAlert, Loader, ReelResult, CategoryNav } from '@/constants/index';
+import NotificationButton from '../NotificationButton';
 
 export default function DownloadForm() {
   const [url, setUrl] = useState('');
@@ -61,6 +62,7 @@ export default function DownloadForm() {
 
   return (
     <div id="download-section" className="bg-white dark:bg-gray-900 py-4 px-4 sm:py-10">
+      <NotificationButton/>
       <CategoryNav />
       <div className="mx-auto max-w-7xl pt-6 ">
         <div className="mx-auto max-w-4xl text-center">
@@ -85,7 +87,7 @@ export default function DownloadForm() {
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="https://www.instagram.com/reel/..."
-                  className="block w-full rounded-md border-2 border-gray-300 py-3 bg-white dark:bg-white px-4 text-gray-900 dark:text-white  placeholder:text-gray-500 sm:text-sm sm:leading-6 focus:outline-none focus:border-indigo-600"
+                  className="block w-full rounded-md border-2 border-gray-300 py-3  dark:bg-white px-4 text-gray-900 dark:text-gray-600  placeholder:text-gray-500 sm:text-sm sm:leading-6 focus:outline-none focus:border-indigo-600"
                 />
               </div>
             </div>
@@ -93,7 +95,7 @@ export default function DownloadForm() {
             <button
               type="submit"
               disabled={isLoading}
-              className="flex w-full justify-center cursor-pointer rounded-md bg-indigo-600 px-4 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500  disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+              className="flex w-full justify-center cursor-pointer rounded-md bg-indigo-600 px-4 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-700  disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
             >
               {isLoading ? (
                 <span className="flex items-center gap-2">
