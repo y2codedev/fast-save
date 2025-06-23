@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { ErrorAlert, SuccessAlert, Loader, ReelResult, CategoryNav } from '@/constants/index';
-import NotificationButton from '../NotificationButton';
 
 export default function DownloadForm() {
   const [url, setUrl] = useState('');
@@ -62,7 +61,6 @@ export default function DownloadForm() {
 
   return (
     <div id="download-section" className="bg-white dark:bg-gray-900 py-4 px-4 sm:py-10">
-      <NotificationButton/>
       <CategoryNav />
       <div className="mx-auto max-w-7xl pt-6 ">
         <div className="mx-auto max-w-4xl text-center">
