@@ -25,7 +25,7 @@ export default function NotificationBell({
 }: NotificationButtonProps) {
   const [permission, setPermission] = useState<NotificationPermission>('default');
   const [isEnabled, setIsEnabled] = useState(false);
-  const [play, { stop }] = useSound('/sounds/notification-bell.mp3', {
+ const [play, { stop }] = useSound('/audio/bell.mp3', {
     volume: 0.5,
     onloaderror: () => console.warn('Sound failed to load'),
     onplayerror: () => console.warn('Sound failed to play'),
