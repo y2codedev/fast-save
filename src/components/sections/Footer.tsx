@@ -15,7 +15,7 @@ const Footer = ({
           <div className="flex flex-col items-center md:flex-row md:items-baseline space-y-2 md:space-y-0">
             <Link href="/" className="flex flex-col md:flex-row items-center md:items-baseline">
               <span className="text-xl font-bold text-gray-900 dark:text-white">
-                Fast<span className="text-indigo-600 dark:text-indigo-400">Save</span>
+                Fast<span className="text-indigo-600 dark:text-indigo-600">Save</span>
               </span>
             </Link>
             <p className="text-sm text-gray-500 dark:text-gray-400 md:ml-4">
@@ -30,7 +30,7 @@ const Footer = ({
                 href={social?.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200"
+                className="text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-600 transition-colors duration-200"
                 aria-label={social?.ariaLabel}
               >
                 <social.icon className="h-5 w-5" />
@@ -45,7 +45,7 @@ const Footer = ({
               <Link
                 key={link?.id}
                 href={link?.href}
-                className="text-sm text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors duration-200"
+                className="text-sm text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-600 transition-colors duration-200"
               >
                 {link?.label}
               </Link>

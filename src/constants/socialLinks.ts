@@ -17,7 +17,8 @@ import {
     PhotoIcon,
     SpeakerWaveIcon,
     RectangleStackIcon,
-    PlayCircleIcon
+    PlayCircleIcon,
+    ScissorsIcon,
 } from '@heroicons/react/24/outline'
 
 import type { Feature, LegalLink, SocialLink, Step } from './types';
@@ -166,5 +167,11 @@ export const NAVITEMS: SocialLink[] = [
         href: '/fb-video',
         icon: PlayCircleIcon,
         ariaLabel: 'FB Video',
+    },
+    {
+        id: 8,
+        href: '/bg-remover',
+        icon: ScissorsIcon, // or SparklesIcon
+        ariaLabel: 'Bg Remove',
     },
 ];

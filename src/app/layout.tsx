@@ -3,6 +3,7 @@ import "./globals.css";
 import { Suspense } from 'react';
 import { Navbar, Footer, Loader } from "@/constants";
 import { ThemeProvider } from 'next-themes'
+import { ToastProvider } from "@/lib/toast-context";
 
 export const metadata: Metadata = {
   title: "Fast Save App",
@@ -18,11 +19,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <ThemeProviderWrapper>
-          <Navbar />
-          <Suspense fallback={<Loader />}>
-            {children}
-          </Suspense>
-          <Footer />
+          <ToastProvider>
+            <Navbar />
+            <Suspense fallback={<Loader />}>
+              {children}
+            </Suspense>
+            <Footer />
+          </ToastProvider>
         </ThemeProviderWrapper>
       </body>
     </html>
@@ -31,7 +34,7 @@ export default function RootLayout({
 
 function ThemeProviderWrapper({ children }: { children: React.ReactNode }) {
   return (
-     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       {children}
     </ThemeProvider>
   )
