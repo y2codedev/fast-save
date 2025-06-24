@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ErrorAlert, SuccessAlert, Loader, ReelResult, CategoryNav } from '@/constants/index';
+import { ErrorAlert, SuccessAlert, Loader, ReelResult } from '@/constants/index';
 
 export default function DownloadForm() {
   const [url, setUrl] = useState('');
@@ -60,17 +60,8 @@ export default function DownloadForm() {
   };
 
   return (
-    <div id="download-section" className="bg-white dark:bg-gray-900 py-4 px-4 sm:py-10">
-      <CategoryNav />
+    <div id="download-section" className="bg-white dark:bg-gray-900  px-4 ">
       <div className="mx-auto max-w-7xl pt-6 ">
-        <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-            Download Instagram Reels & Videos
-          </h2>
-          <p className="mt-6 text-lg leading-8 text-gray-900 dark:text-white">
-            Paste your Instagram Reel URL below to download the video without watermark
-          </p>
-        </div>
         <div className="mx-auto mt-16 max-w-4xl rounded-3xl bg-gray-50 shadow-sm dark:bg-gray-800 p-6 sm:p-10">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>

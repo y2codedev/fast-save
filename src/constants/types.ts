@@ -49,3 +49,10 @@ export interface ReelResultProps {
     isSaving: boolean;
     setIsSaving: (value: boolean) => void;
 }
+
+export interface TopHeaderItem {
+    path: string
+    title: string
+    description: string
+    highlight?: string
+}

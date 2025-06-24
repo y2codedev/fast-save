@@ -111,13 +111,10 @@ const PinterestDownloader = () => {
   };
 
   return (
-    <div className='min-h-screen p-4 bg-white dark:bg-gray-900 flex items-center justify-center'>
-      <div className="w-full max-w-4xl mx-auto p-4 md:p-6 bg-gray-100 dark:bg-gray-800 rounded-xl">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-6 text-center">
-          Pinterest Video & Image Downloader
-        </h1>
-
-        <div className="mb-6">
+    <div  className="bg-white dark:bg-gray-900  px-4  ">
+    <div className='pt-10'>
+        <div className="w-full max-w-5xl mx-auto p-4 md:p-6 bg-gray-100 dark:bg-gray-800 rounded-xl">
+        <div className="">
           <div className="flex flex-col space-y-2">
             <label htmlFor="pinterest-url" className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Pinterest URL
@@ -142,7 +139,7 @@ const PinterestDownloader = () => {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-3 mb-6">
+        <div className="flex flex-wrap gap-3 mt-6">
           <button
             onClick={fetchPinterestData}
             disabled={isLoading || !pinterestUrl}
@@ -263,6 +260,7 @@ const PinterestDownloader = () => {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };
