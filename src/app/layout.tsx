@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Suspense } from 'react';
-import { Navbar, Footer, Loader, LegalDisclaimer, HeroSection, DownloadSteps, ThemeProviderWrapper, CategoryNav } from "@/constants";
+import { Navbar, Footer, LegalDisclaimer,FallbackLoader, HeroSection, DownloadSteps, ThemeProviderWrapper, CategoryNav } from "@/constants";
 import { ToastProvider } from "@/lib/toast-context";
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export default function RootLayout({
         <ThemeProviderWrapper>
           <ToastProvider>
             <Navbar />
-            <Suspense fallback={<Loader />}>
+            <Suspense fallback={<FallbackLoader /> }>
               {children}
             </Suspense>
             <HeroSection />

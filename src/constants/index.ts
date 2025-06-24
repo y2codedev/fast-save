@@ -11,6 +11,7 @@ import ReelResult from '@/components/sections/ReelResult';
 import CategoryNav from '@/components/sections/CategoryNav';
 import ThemeProviderWrapper from '@/components/sections/ThemeProviderWrapper';
 import TopText from '@/components/sections/TopText';
+import FallbackLoader from '@/components/ui/FallbackLoader';
 
 export type { SocialLink, LegalLink, FooterProps } from './types';
 export { DEFAULT_SOCIAL_LINKS, DEFAULT_LEGAL_LINKS, FEATURES } from './socialLinks';
@@ -27,5 +28,6 @@ export {
     Navbar,
     Footer,
     TopText,
-    ThemeProviderWrapper
+    ThemeProviderWrapper,
+    FallbackLoader
 };
