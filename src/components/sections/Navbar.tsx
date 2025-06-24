@@ -81,7 +81,7 @@ const Navbar = () => {
           className="sm:hidden fixed inset-0 z-50"
         >
           <DialogBackdrop className="fixed inset-0 bg-black/30" />
-          <DialogPanel className="fixed inset-y-0 left-0 w-full max-w-xs bg-white dark:bg-gray-900 shadow-xl">
+          <DialogPanel className="fixed inset-y-0 left-0 w-2/3 bg-white dark:bg-gray-900 shadow-xl">
             <div className="flex h-full flex-col overflow-y-auto border-r border-gray-200 dark:border-gray-700 px-4 py-6">
               <div className="flex items-center justify-between mb-8">
                 <Link
