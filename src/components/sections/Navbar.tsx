@@ -109,7 +109,7 @@ const Navbar = () => {
                   <li key={item.id}>
                     <Link
                       href={item.href}
-                      className="flex items-center gap-3 px-3 py-3 rounded-lg text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+                      className="flex items-center gap-3  py-3 rounded-lg text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <item.icon className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
