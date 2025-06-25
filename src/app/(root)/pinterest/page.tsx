@@ -165,9 +165,9 @@ const PinterestDownloader = () => {
               </div>
 
               <div className="grid grid-cols-1 gap-6">
-                {mediaItems.map((item, index) => (
+                {mediaItems?.map((item, index) => (
                   <div
-                    key={`${item.type}-${index}`}
+                    key={`${index}`}
                     className="bg-white dark:bg-gray-800 rounded-lg  overflow-hidden border border-gray-200 dark:border-gray-600"
                   >
                     <div className="p-4">

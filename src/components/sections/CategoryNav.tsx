@@ -13,7 +13,7 @@ export default function CategoryNav() {
     const renderDesktopNav = () => (
         <div className="hidden sm:flex justify-center w-full">
             <ul className="flex gap-3 text-sm whitespace-nowrap font-medium">
-                {NAVITEMS.map((item) => (
+                {NAVITEMS?.map((item) => (
                     <li key={item.id} className="shrink-0">
                         <Link href={item.href} className="group">
                             <div className="flex flex-col items-center gap-1 transition-colors duration-200 text-gray-900 hover:text-indigo-700">
@@ -73,7 +73,7 @@ export default function CategoryNav() {
                                 </button>
                             </div>
                             <ul className="flex-1 overflow-y-auto p-4 flex flex-col gap-1">
-                                {NAVITEMS.map(renderMobileNavItem)}
+                                {NAVITEMS?.map(renderMobileNavItem)}
                             </ul>
                         </div>
                     </DialogPanel>
