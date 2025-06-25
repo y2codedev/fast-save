@@ -23,14 +23,22 @@ export default function LegalDisclaimer() {
                 </p>
                 <p className="font-medium">
                   By using our service, you agree to our
-                  <Link href="/terms" className="text-indigo-600 dark:text-indigo-600 hover:text-indigo-700">
+                  <Link
+                    href="/terms"
+                    className="text-indigo-600 dark:text-indigo-500 underline hover:text-indigo-700 dark:hover:text-indigo-400"
+                  >
                     Terms of Service
                   </Link>
                   and
-                  <Link href="/privacy" className="text-indigo-600 dark:text-indigo-600 hover:text-indigo-700">
-                    Privacy Policy.
+                  <Link
+                    href="/privacy"
+                    className="text-indigo-600 dark:text-indigo-500 underline hover:text-indigo-700 dark:hover:text-indigo-400"
+                  >
+                    Privacy Policy
                   </Link>
+                  .
                 </p>
+
               </div>
             </div>
           </div>
