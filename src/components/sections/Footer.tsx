@@ -45,7 +45,7 @@ const Footer = ({
               <Link
                 key={link?.id}
                 href={link?.href}
-                className="text-sm text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-600 transition-colors duration-200"
+                className="text-sm text-gray-500 underline transition-colors duration-200"
               >
                 {link?.label}
               </Link>

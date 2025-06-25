@@ -25,14 +25,14 @@ export default function LegalDisclaimer() {
                   By using our service, you agree to our
                   <Link
                     href="/terms"
-                    className="text-indigo-600 dark:text-indigo-500 underline hover:text-indigo-700 dark:hover:text-indigo-400"
+                    className="text-indigo-600 px-2 underline hover:text-indigo-700 "
                   >
                     Terms of Service
                   </Link>
                   and
                   <Link
                     href="/privacy"
-                    className="text-indigo-600 dark:text-indigo-500 underline hover:text-indigo-700 dark:hover:text-indigo-400"
+                    className="text-indigo-600 px-2 underline hover:text-indigo-700 "
                   >
                     Privacy Policy
                   </Link>
