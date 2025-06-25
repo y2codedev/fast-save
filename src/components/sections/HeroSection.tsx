@@ -5,7 +5,7 @@ export default function HeroSection() {
   return (
     <div className="bg-white dark:bg-gray-900 px-4  ">
       <div className='py-20'>
-          <TopText />
+        <TopText />
       </div>
       <div className="mx-auto max-w-7xl  pb-24">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">

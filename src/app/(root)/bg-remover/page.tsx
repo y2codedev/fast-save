@@ -95,7 +95,7 @@ const BackgroundRemover = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900  px-4 mt-10 ">
+    <div className="bg-white dark:bg-gray-900  px-4 pt-10 ">
       <div className="max-w-5xl mx-auto p-4 md:p-6 bg-gray-100 dark:bg-gray-800 rounded-xl ">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Background Remover</h2>
         <div className="flex mb-6 border-b border-gray-200 dark:border-gray-700">
