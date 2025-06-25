@@ -1,4 +1,7 @@
+
 'use client';
+
+import Link from "next/link";
 
 export default function LegalDisclaimer() {
   return (
@@ -19,7 +22,14 @@ export default function LegalDisclaimer() {
                   We respect intellectual property rights and comply with the DMCA. If you believe any content infringes your copyright, please contact us with the details.
                 </p>
                 <p className="font-medium">
-                  By using our service, you agree to our <a href="/terms" className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-500">Terms of Service</a> and <a href="/privacy" className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-500">Privacy Policy</a>.
+                  By using our service, you agree to our
+                  <Link href="/terms" className="text-indigo-600 dark:text-indigo-600 hover:text-indigo-700">
+                    Terms of Service
+                  </Link>
+                  and
+                  <Link href="/privacy" className="text-indigo-600 dark:text-indigo-600 hover:text-indigo-700">
+                    Privacy Policy.
+                  </Link>
                 </p>
               </div>
             </div>

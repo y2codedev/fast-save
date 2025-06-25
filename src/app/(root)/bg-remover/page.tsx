@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useRef, ChangeEvent } from 'react';
-import { Loader2, UploadCloud, Link, Image as ImageIcon } from 'lucide-react';
+import { Loader2, UploadCloud, Link as LinkIcon, Image as ImageIcon } from 'lucide-react';
 import { useAppToast } from '@/hooks/use-app-toast';
+import Link from 'next/link';
 
 const BackgroundRemover = () => {
   const [mode, setMode] = useState<'upload' | 'url'>('upload');
@@ -110,7 +111,7 @@ const BackgroundRemover = () => {
             onClick={() => setMode('url')}
             className={`flex-1 py-2 font-medium text-center ${mode === 'url' ? 'text-indigo-600 border-b-2 border-indigo-600 dark:text-indigo-400 dark:border-indigo-400' : 'text-gray-500 dark:text-gray-400'}`}
           >
-            <Link className="inline-block mr-2 h-5 w-5" />
+            <LinkIcon className="inline-block mr-2 h-5 w-5" />
             Image URL
           </button>
         </div>
@@ -150,7 +151,7 @@ const BackgroundRemover = () => {
               </label>
               <div className="flex rounded-md shadow-sm">
                 <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
-                  <Link className="h-5 w-5" />
+                  <LinkIcon className="h-5 w-5" />
                 </span>
                 <input
                   type="url"
@@ -245,13 +246,12 @@ const BackgroundRemover = () => {
           )}
 
           {resultImage && (
-            <a
+            <Link
               href={resultImage}
-              download="background-removed.png"
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700"
             >
               Download Result
-            </a>
+            </Link>
           )}
         </div>
       </div>
