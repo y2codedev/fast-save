@@ -41,8 +41,8 @@ export default function DownloadForm() {
 
   return (
     <div id="download-section" className="bg-white dark:bg-gray-900  px-4 ">
-      <div className="mx-auto max-w-7xl pt-6 ">
-        <div className="mx-auto mt-16 max-w-4xl rounded-3xl bg-gray-50 shadow-sm dark:bg-gray-800 p-6 sm:p-10">
+      <div className="mx-auto max-w-7xl ">
+        <div className="mx-auto mt-10 max-w-4xl rounded-3xl bg-gray-50 shadow-sm dark:bg-gray-800 p-6 sm:p-10">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <InputField
