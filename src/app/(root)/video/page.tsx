@@ -3,45 +3,22 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import { Loader2 } from 'lucide-react';
-
-interface MediaItem {
-  url: string;
-  type: 'video' | 'image';
-  quality?: string;
-  label?: string;
-  width?: number;
-  height?: number;
-  ext?: string;
-  bitrate?: number;
-  fps?: number;
-}
-
-interface SocialMediaResponse {
-  success: boolean;
-  platform: string;
-  title?: string;
-  thumbnail?: string;
-  author?: string;
-  duration?: number;
-  medias: MediaItem[];
-  error?: string;
-}
+import { Button, Toast } from '@/constants';
+import { SocialMediaResponse } from '@/constants/types';
 
 export default function SocialMediaDownloader() {
   const [url, setUrl] = useState('');
   const [result, setResult] = useState<SocialMediaResponse | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
   const [isSaving, setIsSaving] = useState(false);
 
   const fetchMedia = async () => {
     if (!url) {
-      setError('Please enter a valid social media URL');
+      Toast('error', 'Please enter a valid social media URL');
       return;
     }
 
     setLoading(true);
-    setError('');
     setResult(null);
 
     try {
@@ -84,39 +61,39 @@ export default function SocialMediaDownloader() {
       setResult(transformedData);
     } catch (err) {
       console.error('Error:', err);
-      setError(err instanceof Error ? err.message : 'Failed to fetch media');
+      Toast('error', err instanceof Error ? err.message : 'Failed to fetch media');
     } finally {
       setLoading(false);
     }
   };
 
-const handleDownload = async (downloadUrl: string) => {
-  setIsSaving(true);
-  try {
-    const response = await fetch(downloadUrl, {
-      headers: {
-        Referer: "https://www.youtube.com/",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-      },
-    });
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = "video.mp4"; // Set a valid filename
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
-  } catch (err) {
-    console.error('Download failed:', err);
-    setError('Download failed. URL may be expired or restricted.');
-  } finally {
-    setIsSaving(false);
-  }
-};
+  const handleDownload = async (downloadUrl: string) => {
+    setIsSaving(true);
+    try {
+      const response = await fetch(downloadUrl, {
+        headers: {
+          Referer: "https://www.youtube.com/",
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+        },
+      });
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = "video.mp4";
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (err) {
+      console.error('Download failed:', err);
+      Toast('error', 'Download failed. URL may be expired or restricted.');
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   const formatDuration = (seconds: number | undefined) => {
     if (!seconds) return '';
@@ -125,39 +102,24 @@ const handleDownload = async (downloadUrl: string) => {
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
-
-  console.log(result?.thumbnail, "result");
-
   return (
-    <div  className="bg-white dark:bg-gray-900  px-4 mt-10 ">
-      <div className="max-w-5xl mx-auto sm:p-10 p-4 bg-gray-100 rounded-xl">
-        <div className="flex gap-2">
+    <div className="bg-white dark:bg-gray-900  px-4 pt-10 ">
+      <div className="max-w-5xl mx-auto sm:p-10 p-4 bg-gray-100 dark:bg-gray-800 rounded-xl">
+        <div className="pb-4">
           <input
             type="text"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="Paste social media URL here"
-            className="flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="block w-full rounded-md border-2 border-gray-300 py-2  dark:bg-white px-4 text-gray-900 dark:text-gray-600  placeholder:text-gray-500 sm:text-sm sm:leading-6 focus:outline-none focus:border-indigo-600"
           />
-          <button
-            onClick={fetchMedia}
-            disabled={loading}
-            className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            {loading ? (
-              <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" strokeWidth={3} />
-                Fetching...
-              </>
-            ) : 'Get Media'}
-          </button>
-        </div>
 
-        {error && (
-          <div className="p-3 mb-6 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg">
-            {error}
-          </div>
-        )}
+        </div>
+        <Button
+          onClick={fetchMedia}
+          isProcessing={loading}
+          labal='Get Media'
+        />
 
         {result && (
           <div className="mt-6 bg-transparent dark:bg-transparent rounded-xl overflow-hidden">
@@ -241,23 +203,12 @@ const handleDownload = async (downloadUrl: string) => {
                         </div>
                       </div>
 
-                      <button
+                      <Button
                         onClick={() => handleDownload(item.url)}
-                        disabled={isSaving}
-                        className="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                      >
-                        {isSaving ? (
-                          <>
-                            <Loader2 className="h-4 w-4 mr-2 animate-spin" strokeWidth={3} />
-                            Downloading...
-                          </>
-                        ) : (
-                          <>
-                            <ArrowDownTrayIcon className="h-5 w-5" />
-                            Download {item.type === 'video' ? 'Video' : 'Image'}
-                          </>
-                        )}
-                      </button>
+                        isProcessing={isSaving}
+                        labal='Download'
+                        icon={true}
+                      />
                     </div>
                   </div>
                 </div>

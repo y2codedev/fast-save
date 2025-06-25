@@ -17,9 +17,6 @@ export default function CategoryNav() {
                     <li key={item.id} className="shrink-0">
                         <Link href={item.href} className="group">
                             <div className="flex flex-col items-center gap-1 transition-colors duration-200 text-gray-900 hover:text-indigo-700">
-                                {/* <span className="bg-gray-200 rounded-full size-10 flex items-center justify-center">
-                                    <item.icon className="w-5 h-5 stroke-2" />
-                                </span> */}
                                 <span className="dark:text-white text-xs mt-1">
                                     {item.ariaLabel}
                                 </span>

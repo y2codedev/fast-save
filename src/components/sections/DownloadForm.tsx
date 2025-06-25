@@ -1,37 +1,19 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ErrorAlert, SuccessAlert, Loader, ReelResult } from '@/constants/index';
+import { ErrorAlert, SuccessAlert, Loader, ReelResult, Toast, Button } from '@/constants';
 
 export default function DownloadForm() {
   const [url, setUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
   const [downloadData, setDownloadData] = useState<any>(null);
   const [isSaving, setIsSaving] = useState(false);
-
-  useEffect(() => {
-    if (success) {
-      const timer = setTimeout(() => {
-        setSuccess(false);
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [success]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
-    setSuccess(false);
 
     try {
-      const instagramReelRegex = /^https?:\/\/(www\.)?instagram\.com\/(reel|p)\/([A-Za-z0-9_-]+)\/?/;
-      if (!instagramReelRegex.test(url)) {
-        throw new Error('Please enter a valid Instagram Reel URL');
-      }
-
       const response = await fetch('/api/download', {
         method: 'POST',
         headers: {
@@ -47,13 +29,11 @@ export default function DownloadForm() {
       }
 
       setDownloadData(data);
-      setSuccess(true);
       setUrl('');
-      setError('');
 
     } catch (err) {
       console.error('Download error:', err);
-      setError(err instanceof Error ? err.message : 'Failed to fetch video. Please try again.');
+      Toast('error', err instanceof Error ? err.message : 'Failed to fetch video. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -76,25 +56,15 @@ export default function DownloadForm() {
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="https://www.instagram.com/reel/..."
-                  className="block w-full rounded-md border-2 border-gray-300 py-3  dark:bg-white px-4 text-gray-900 dark:text-gray-600  placeholder:text-gray-500 sm:text-sm sm:leading-6 focus:outline-none focus:border-indigo-600"
+                  className="block w-full rounded-md border-2 border-gray-300 py-2  dark:bg-white px-4 text-gray-900 dark:text-gray-600  placeholder:text-gray-500 sm:text-sm sm:leading-6 focus:outline-none focus:border-indigo-600"
                 />
               </div>
             </div>
 
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="flex w-full justify-center cursor-pointer rounded-md bg-indigo-600 px-4 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-700  disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
-            >
-              {isLoading ? (
-                <span className="flex items-center gap-2">
-                  <Loader />
-                  Processing...
-                </span>
-              ) : 'Download Now'}
-            </button>
-            {error && <ErrorAlert error={error} />}
-            {success && <SuccessAlert message="Download successful!" />}
+            <Button
+              isProcessing={isLoading}
+              labal='Download Now'
+            />
           </form>
           {downloadData && <ReelResult data={downloadData} isSaving={isSaving} setIsSaving={setIsSaving} />}
         </div>

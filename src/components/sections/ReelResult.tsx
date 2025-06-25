@@ -1,7 +1,7 @@
 'use client';
 
 import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
-import { Loader } from '@/constants';
+import { Button, Loader } from '@/constants';
 import { ReelResultProps } from '@/constants/types';
 import Image from 'next/image';
 
@@ -39,7 +39,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                                 alt={data.title || 'Instagram Reel'}
                                 fill
                                 className="object-cover"
-                                unoptimized 
+                                unoptimized
                             />
                         ) : (
                             <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
@@ -47,7 +47,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                             </div>
                         )}
                     </div>
-                    
+
                     <div className="flex-1 space-y-3">
                         <div>
                             <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">Title</h4>
@@ -57,12 +57,12 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                         </div>
                     </div>
                 </div>
-                
+
                 {data.video_url && (
-                    <div className="mt-4 rounded-xl  overflow-hidden">
+                    <div className="mt-4 rounded-xl overflow-hidden h-80">
                         <video
                             controls
-                            className="w-full rounded-lg"
+                            className="w-full h-full object-cover rounded-lg"
                             poster={data.thumbnail}
                         >
                             <source src={data.video_url} type="video/mp4" />
@@ -70,26 +70,16 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                         </video>
                     </div>
                 )}
+
             </div>
-            
-            <div className=" px-4 py-3 sm:px-6 flex justify-end">
-                <button
+
+            <div className=" px-4  sm:px-4 flex justify-end">
+                <Button
                     onClick={handleDownload}
-                    disabled={isSaving}
-                    className="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                    {isSaving ? (
-                        <>
-                            <Loader />
-                            Downloading...
-                        </>
-                    ) : (
-                        <>
-                            <ArrowDownTrayIcon className="h-5 w-5" />
-                            Download Reel
-                        </>
-                    )}
-                </button>
+                    isProcessing={isSaving}
+                    labal='Download Reel'
+                    icon={true}
+                />
             </div>
         </div>
     );

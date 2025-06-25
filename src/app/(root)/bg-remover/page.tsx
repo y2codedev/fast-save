@@ -2,8 +2,9 @@
 
 import { useState, useRef, ChangeEvent } from 'react';
 import { Loader2, UploadCloud, Link as LinkIcon, Image as ImageIcon } from 'lucide-react';
-import { useAppToast } from '@/hooks/use-app-toast';
 import Link from 'next/link';
+import { Button, ResetButton, Toast, } from '@/constants';
+import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 
 const BackgroundRemover = () => {
   const [mode, setMode] = useState<'upload' | 'url'>('upload');
@@ -12,7 +13,6 @@ const BackgroundRemover = () => {
   const [resultImage, setResultImage] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { showSuccess, showError, showWarning } = useAppToast();
 
   const RAPIDAPI_KEY = process.env.NEXT_PUBLIC_RAPIDAPI_KEY || '5da58acae9mshaca9e06ba0032afp175489jsn9e4219e979ab';
 
@@ -31,7 +31,7 @@ const BackgroundRemover = () => {
 
   const removeBackground = async () => {
     if ((mode === 'upload' && !imageFile) || (mode === 'url' && !imageUrl)) {
-      showWarning(mode === 'upload' ? 'Please select an image file' : 'Please enter a valid image URL');
+      Toast("error", mode === 'upload' ? 'Please select an image file' : 'Please enter a valid image URL');
       return;
     }
 
@@ -76,10 +76,10 @@ const BackgroundRemover = () => {
       }
 
       setResultImage(resultUrl);
-      showSuccess('Background removed successfully!');
+      Toast('success', 'Background removed successfully!');
     } catch (error) {
       console.error('Background removal failed:', error);
-      showError(error instanceof Error ? error.message : 'Failed to remove background');
+      Toast("error", error instanceof Error ? error.message : 'Failed to remove background');
     } finally {
       setIsProcessing(false);
     }
@@ -95,10 +95,9 @@ const BackgroundRemover = () => {
   };
 
   return (
-    <div  className="bg-white dark:bg-gray-900  px-4 mt-10 ">
+    <div className="bg-white dark:bg-gray-900  px-4 mt-10 ">
       <div className="max-w-5xl mx-auto p-4 md:p-6 bg-gray-100 dark:bg-gray-800 rounded-xl ">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Background Remover</h2>
-
         <div className="flex mb-6 border-b border-gray-200 dark:border-gray-700">
           <button
             onClick={() => setMode('upload')}
@@ -181,7 +180,7 @@ const BackgroundRemover = () => {
                   src={imageUrl}
                   alt="Original"
                   className="object-contain w-full h-full"
-                  onError={() => showError('Failed to load image from URL')}
+                  onError={() => Toast('error', 'Failed to load image from URL')}
                 />
               ) : (
                 <div className="flex flex-col items-center justify-center h-full text-gray-400">
@@ -204,7 +203,7 @@ const BackgroundRemover = () => {
                 <div className="flex flex-col items-center justify-center h-full text-gray-400">
                   {isProcessing ? (
                     <div className='flex items-center gap-2'>
-                     <Loader2 className="h-4 w-4 animate-spin" strokeWidth={3} />
+                      <Loader2 className="h-4 w-4 animate-spin" strokeWidth={3} />
                       <span>Processing...</span>
                     </div>
                   ) : (
@@ -220,37 +219,26 @@ const BackgroundRemover = () => {
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <button
+          <Button
             onClick={removeBackground}
-            disabled={isProcessing || (mode === 'upload' ? !imageFile : !imageUrl)}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isProcessing ? (
-              <div className='flex items-center gap-2'>
-                <Loader2 className="h-4 w-4 animate-spin" strokeWidth={3} />
-                Processing...
-              </div>
-            ) : (
-              'Remove Background'
-            )}
-          </button>
+            isProcessing={isProcessing}
+            labal='Remove Background'
+          />
 
           {(imageFile || imageUrl) && (
-            <button
+            <ResetButton
               onClick={resetForm}
-              disabled={isProcessing}
-              className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md shadow-sm text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700  disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Reset
-            </button>
+              isProcessing={isProcessing}
+              labal='Reset'
+            />
           )}
 
           {resultImage && (
             <Link
               href={resultImage}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
             >
-              Download Result
+             <ArrowDownTrayIcon className="h-5 w-5 mr-2" />  Download Result
             </Link>
           )}
         </div>

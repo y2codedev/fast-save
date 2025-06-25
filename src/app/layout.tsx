@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Suspense } from 'react';
-import { Navbar, Footer, LegalDisclaimer,FallbackLoader, HeroSection, DownloadSteps, ThemeProviderWrapper, CategoryNav } from "@/constants";
-import { ToastProvider } from "@/lib/toast-context";
+import { Navbar, Footer, LegalDisclaimer, FallbackLoader, HeroSection, DownloadSteps, ThemeProviderWrapper, ToastProvider } from "@/constants";
 
 export const metadata: Metadata = {
   title: "Fast Save App",
@@ -17,16 +16,15 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <ThemeProviderWrapper>
-          <ToastProvider>
-            <Navbar />
-            <Suspense fallback={<FallbackLoader /> }>
-              {children}
-            </Suspense>
-            <HeroSection />
-            <DownloadSteps />
-            <LegalDisclaimer />
-            <Footer />
-          </ToastProvider>
+          <Navbar />
+          <Suspense fallback={<FallbackLoader />}>
+            {children}
+          </Suspense>
+          <HeroSection />
+          <DownloadSteps />
+          <LegalDisclaimer />
+          <Footer />
+          <ToastProvider />
         </ThemeProviderWrapper>
       </body>
     </html>

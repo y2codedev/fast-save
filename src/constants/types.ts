@@ -56,3 +56,33 @@ export interface TopHeaderItem {
     description: string
     highlight?: string
 }
+
+export interface ButtonProps {
+    onClick?: () => void;
+    isProcessing: boolean;
+    labal: string;
+    icon?: boolean
+}
+
+interface MediaItem {
+    url: string;
+    type: 'video' | 'image';
+    quality?: string;
+    label?: string;
+    width?: number;
+    height?: number;
+    ext?: string;
+    bitrate?: number;
+    fps?: number;
+}
+
+export interface SocialMediaResponse {
+    success: boolean;
+    platform: string;
+    title?: string;
+    thumbnail?: string;
+    author?: string;
+    duration?: number;
+    medias: MediaItem[];
+    error?: string;
+}
