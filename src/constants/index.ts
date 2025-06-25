@@ -20,7 +20,7 @@ import InputField from '@/components/sections/InputField';
 
 
 export type { SocialLink, LegalLink, FooterProps } from './types';
-export { DEFAULT_SOCIAL_LINKS, DEFAULT_LEGAL_LINKS, FEATURES } from './socialLinks';
+export { DEFAULT_SOCIAL_LINKS, DEFAULT_LEGAL_LINKS, FEATURES } from './data';
 export {
     HeroSection,
     DownloadForm,

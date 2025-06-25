@@ -1,6 +1,6 @@
 'use client'
 
-import { NAVITEMS } from "@/constants/socialLinks";
+import { NAVITEMS } from "@/constants/data";
 import Link from "next/link";
 import { ChevronRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';

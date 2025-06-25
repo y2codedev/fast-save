@@ -1,6 +1,6 @@
 "use client";
 
-import { TopHeader_Item } from '@/constants/socialLinks';
+import { TopHeader_Item } from '@/constants/data';
 import { usePathname } from 'next/navigation'
 import React from 'react'
 const TopText = () => {

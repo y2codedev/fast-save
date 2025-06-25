@@ -3,7 +3,7 @@
 import { FaShareAlt, FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { NAVITEMS } from '@/constants/socialLinks';
+import { NAVITEMS } from '@/constants/data';
 import { useState } from 'react';
 import { Dialog, DialogPanel, DialogBackdrop } from '@headlessui/react';
 import { ChevronRightIcon } from 'lucide-react';
@@ -129,8 +129,6 @@ const Navbar = () => {
       <ShareDialog
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        url="https://example.com"
-        title="Example Page"
       />
     </header>
   );

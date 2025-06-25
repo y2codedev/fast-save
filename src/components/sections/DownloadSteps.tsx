@@ -1,6 +1,6 @@
 'use client';
 
-import { STEP } from "@/constants/socialLinks";
+import { STEP } from "@/constants/data";
 export default function DownloadSteps() {
     return (
         <div className="bg-white  dark:bg-gray-900 flex items-center justify-center">

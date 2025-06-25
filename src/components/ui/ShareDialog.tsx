@@ -1,68 +1,11 @@
 import { Dialog, DialogPanel, DialogBackdrop } from '@headlessui/react';
-import {
-  EmailIcon,
-  FacebookIcon,
-  FacebookMessengerIcon,
-  GabIcon,
-  HatenaIcon,
-  InstapaperIcon,
-  LineIcon,
-  LinkedinIcon,
-  LivejournalIcon,
-  MailruIcon,
-  OKIcon,
-  PinterestIcon,
-  PocketIcon,
-  RedditIcon,
-  TelegramIcon,
-  ThreadsIcon,
-  TumblrIcon,
-  TwitterIcon,
-  ViberIcon,
-  VKIcon,
-  WeiboIcon,
-  WhatsappIcon,
-  WorkplaceIcon,
-  XIcon,
-  BlueskyIcon,
-} from "react-share";
-
+import { socialIcons } from '@/constants/socialIcons';
 interface SharePopupProps {
   onClose: () => void;
-  url: string;
-  title?: string;
   isOpen: boolean;
 }
 
-const ShareDialog = ({ onClose, url, title = "", isOpen }: SharePopupProps) => {
-  const icons = [
-    { Icon: EmailIcon, name: "Email" },
-    { Icon: FacebookIcon, name: "Facebook" },
-    { Icon: FacebookMessengerIcon, name: "Messenger" },
-    { Icon: GabIcon, name: "Gab" },
-    { Icon: HatenaIcon, name: "Hatena" },
-    { Icon: InstapaperIcon, name: "Instapaper" },
-    { Icon: LineIcon, name: "Line" },
-    { Icon: LinkedinIcon, name: "LinkedIn" },
-    { Icon: LivejournalIcon, name: "LiveJournal" },
-    { Icon: MailruIcon, name: "Mail.ru" },
-    { Icon: OKIcon, name: "Odnoklassniki" },
-    { Icon: PinterestIcon, name: "Pinterest" },
-    { Icon: PocketIcon, name: "Pocket" },
-    { Icon: RedditIcon, name: "Reddit" },
-    { Icon: TelegramIcon, name: "Telegram" },
-    { Icon: ThreadsIcon, name: "Threads" },
-    { Icon: TumblrIcon, name: "Tumblr" },
-    { Icon: TwitterIcon, name: "Twitter" },
-    { Icon: ViberIcon, name: "Viber" },
-    { Icon: VKIcon, name: "VK" },
-    { Icon: WeiboIcon, name: "Weibo" },
-    { Icon: WhatsappIcon, name: "WhatsApp" },
-    { Icon: WorkplaceIcon, name: "Workplace" },
-    { Icon: XIcon, name: "X" },
-    { Icon: BlueskyIcon, name: "Bluesky" },
-  ];
-
+const ShareDialog = ({ onClose, isOpen }: SharePopupProps) => {
   return (
     <Dialog
       open={isOpen}
@@ -89,7 +32,7 @@ const ShareDialog = ({ onClose, url, title = "", isOpen }: SharePopupProps) => {
 
             <div className="h-[60vh] overflow-y-auto">
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
-                {icons.map(({ Icon, name }) => (
+                {socialIcons.map(({ Icon, name }) => (
                   <button
                     key={name}
                     className="flex flex-col items-center rounded-lg p-3 transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
