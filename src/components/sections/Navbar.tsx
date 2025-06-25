@@ -7,10 +7,12 @@ import { NAVITEMS } from '@/constants/socialLinks';
 import { useState } from 'react';
 import { Dialog, DialogPanel, DialogBackdrop } from '@headlessui/react';
 import { ChevronRightIcon } from 'lucide-react';
+import ShareDialog from '../ui/ShareDialog';
 
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
@@ -66,6 +68,7 @@ const Navbar = () => {
             </button>
 
             <button
+              onClick={() => setIsOpen(true)}
               type="button"
               className="p-2 rounded-full text-gray-700 dark:text-white hover:text-gray-900 dark:hover:text-white bg-gray-100 hover:bg-gray-100 dark:bg-gray-800 transition-all duration-200 cursor-pointer"
               aria-label="Share this page"
@@ -123,6 +126,12 @@ const Navbar = () => {
           </DialogPanel>
         </Dialog>
       </nav>
+      <ShareDialog
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        url="https://example.com"
+        title="Example Page"
+      />
     </header>
   );
 };
