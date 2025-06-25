@@ -1,7 +1,6 @@
 'use client';
 
-import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
-import { Button, Loader } from '@/constants';
+import { Button} from '@/constants';
 import { ReelResultProps } from '@/constants/types';
 import Image from 'next/image';
 

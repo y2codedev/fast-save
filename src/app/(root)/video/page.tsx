@@ -1,8 +1,6 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
-import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
-import { Loader2 } from 'lucide-react';
 import { Button, Toast } from '@/constants';
 import { SocialMediaResponse } from '@/constants/types';
 

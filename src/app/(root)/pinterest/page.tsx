@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, ChangeEvent } from 'react';
-import { Download, Link as LinkIcon, Image as ImageIcon, Film } from 'lucide-react';
+import { Link as LinkIcon, Image as ImageIcon, Film } from 'lucide-react';
 import { Button, ResetButton, Toast } from '@/constants';
 import Link from 'next/link';
 import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
