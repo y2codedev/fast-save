@@ -14,6 +14,10 @@ import ResetButton from '@/components/sections/ResetButton';
 import Button from '@/components/sections/Button';
 import ToastProvider from '@/components/sections/ToastProvider';
 import Toast from '@/lib/tost';
+import usePinterestDownloader from '@/hooks/usePinterestDownloader';
+import useBackgroundRemover from '@/hooks/useBackgroundRemover';
+import InputField from '@/components/sections/InputField';
+
 
 export type { SocialLink, LegalLink, FooterProps } from './types';
 export { DEFAULT_SOCIAL_LINKS, DEFAULT_LEGAL_LINKS, FEATURES } from './socialLinks';
@@ -33,5 +37,8 @@ export {
     ResetButton,
     Button,
     ToastProvider,
-    Toast
+    Toast,
+    InputField,
+    usePinterestDownloader,
+    useBackgroundRemover
 };

@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
-import { Button, Toast } from '@/constants';
+import { Button, InputField, Toast } from '@/constants';
 import { SocialMediaResponse } from '@/constants/types';
 
 export default function SocialMediaDownloader() {
@@ -103,21 +103,20 @@ export default function SocialMediaDownloader() {
   return (
     <div className="bg-white dark:bg-gray-900  px-4 pt-10 ">
       <div className="max-w-5xl mx-auto sm:p-10 p-4 bg-gray-100 dark:bg-gray-800 rounded-xl">
-        <div className="pb-4">
-          <input
-            type="text"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            placeholder="Paste social media URL here"
-            className="block w-full rounded-md border-2 border-gray-300 py-2  dark:bg-white px-4 text-gray-900 dark:text-gray-600  placeholder:text-gray-500 sm:text-sm sm:leading-6 focus:outline-none focus:border-indigo-600"
-          />
+        <InputField
+          label='Enter Video URL'
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          placeholder="Paste social media URL here"
+        />
 
-        </div>
-        <Button
+        <div className='mt-4'>
+          <Button 
           onClick={fetchMedia}
           isProcessing={loading}
           labal='Get Media'
         />
+        </div>
 
         {result && (
           <div className="mt-6 bg-transparent dark:bg-transparent rounded-xl overflow-hidden">

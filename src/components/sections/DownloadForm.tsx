@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ReelResult, Toast, Button } from '@/constants';
+import { ReelResult, Toast, Button, InputField } from '@/constants';
 
 export default function DownloadForm() {
   const [url, setUrl] = useState('');
@@ -45,22 +45,13 @@ export default function DownloadForm() {
         <div className="mx-auto mt-16 max-w-4xl rounded-3xl bg-gray-50 shadow-sm dark:bg-gray-800 p-6 sm:p-10">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="url" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                Instagram Reel URL
-              </label>
-              <div className="mt-2">
-                <input
-                  type="url"
-                  id="url"
-                  name="url"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                  placeholder="https://www.instagram.com/reel/..."
-                  className="block w-full rounded-md border-2 border-gray-300 py-2  dark:bg-white px-4 text-gray-900 dark:text-gray-600  placeholder:text-gray-500 sm:text-sm sm:leading-6 focus:outline-none focus:border-indigo-600"
-                />
-              </div>
+              <InputField
+                label='Enter Instagram Reel URL'
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                placeholder="https://www.instagram.com/reel/..."
+              />
             </div>
-
             <Button
               isProcessing={isLoading}
               labal='Download Now'
