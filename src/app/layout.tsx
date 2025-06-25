@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Suspense } from 'react';
-import { Navbar, Footer, LegalDisclaimer, FallbackLoader, HeroSection, DownloadSteps, ThemeProviderWrapper, ToastProvider } from "@/constants";
+import dynamic from "next/dynamic";
+import { Navbar, Footer, FallbackLoader, ThemeProviderWrapper, ToastProvider } from "@/constants";
+const HeroSection = dynamic(() => import('@/components/sections/HeroSection'), { ssr: false });
+const DownloadSteps = dynamic(() => import('@/components/sections/DownloadSteps'), { ssr: false });
+const LegalDisclaimer = dynamic(() => import('@/components/sections/LegalDisclaimer'), { ssr: false });
 
 export const metadata: Metadata = {
   title: "Fast Save",
