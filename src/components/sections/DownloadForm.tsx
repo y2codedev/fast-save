@@ -11,16 +11,9 @@ export default function DownloadClient() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!url.trim()) {
-      Toast('error', 'Please enter a valid URL');
-      return;
-    }
-
     setIsLoading(true);
 
     try {
-      
       const formData = new FormData();
       formData.append('url', url);
       const data = await downloadVideo(formData);
@@ -49,9 +42,16 @@ export default function DownloadClient() {
               placeholder="https://www.instagram.com/reel/..."
             />
             <Button
-              labal="Download Now"
+              labal="Click Here"
               isProcessing={isLoading}
             />
+
+            {isLoading && (
+              <div className="text-center text-sm text-gray-500">
+                Processing your reel...
+              </div>
+            )}
+
             {downloadData && (
               <ReelResult
                 data={downloadData}
