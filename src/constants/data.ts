@@ -176,20 +176,20 @@ export const NAVITEMS: SocialLink[] = [
         icon: PhotoIcon,
         ariaLabel: 'Photo',
     },
-    // {
-    //     id: 5,
-    //     href: '/stories',
-    //     icon: CameraIcon,
-    //     ariaLabel: 'Stories',
-    // },
     {
         id: 5,
+        href: '/stories',
+        icon: CameraIcon,
+        ariaLabel: 'Stories',
+    },
+    {
+        id: 6,
         href: '/fb-video',
         icon: PlayCircleIcon,
         ariaLabel: 'FB Video',
     },
     {
-        id: 6,
+        id: 7,
         href: '/bg-remover',
         icon: ScissorsIcon,
         ariaLabel: 'Bg Remove',
