@@ -1,65 +1,63 @@
 'use client';
 
 import { useState } from 'react';
-import { ReelResult, Toast, InputField, Button } from '@/constants';
-import { downloadVideo } from '@/app/actions/download';
+import { ReelResult, Toast, Button, InputField } from '@/constants';
 
-export default function DownloadClient() {
-  const [url, setUrl] = useState<string>('');
+export default function DownloadForm() {
+  const [url, setUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [downloadData, setDownloadData] = useState<any>(null);
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      const formData = new FormData();
-      formData.append('url', url);
-      const data = await downloadVideo(formData);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/download`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to process video');
+      }
+
       setDownloadData(data);
       setUrl('');
 
-    } catch (error) {
-      Toast(
-        'error',
-        error instanceof Error ? error.message : 'Download failed. Please try again.'
-      );
+    } catch (err) {
+      console.error('Download error:', err);
+      Toast('error', err instanceof Error ? err.message : 'Failed to fetch video. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 pt-10 px-4">
-      <div className="mx-auto max-w-7xl">
+    <div id="download-section" className="bg-white dark:bg-gray-900 pt-10  px-4 ">
+      <div className="mx-auto max-w-7xl ">
         <div className="mx-auto max-w-4xl rounded-3xl bg-gray-50 shadow-sm dark:bg-gray-800 p-6 sm:p-10">
           <form onSubmit={handleSubmit} className="space-y-6">
-            <InputField
-              label="Instagram Reel URL"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              placeholder="https://www.instagram.com/reel/..."
-            />
-            <Button
-              labal="Click Here"
-              isProcessing={isLoading}
-            />
-
-            {isLoading && (
-              <div className="text-center text-sm text-gray-500">
-                Processing your reel...
-              </div>
-            )}
-
-            {downloadData && (
-              <ReelResult
-                data={downloadData}
-                isSaving={false}
-                setIsSaving={() => { }}
+            <div>
+              <InputField
+                label='Enter Instagram Reel URL'
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                placeholder="https://www.instagram.com/reel/..."
               />
-            )}
+            </div>
+            <Button
+              isProcessing={isLoading}
+              labal='Download Now'
+            />
           </form>
+          {downloadData && <ReelResult data={downloadData} isSaving={isSaving} setIsSaving={setIsSaving} />}
         </div>
       </div>
     </div>
