@@ -13,10 +13,9 @@ const ShareDialog = ({ onClose, isOpen }: SharePopupProps) => {
       className="relative z-50"
     >
       <DialogBackdrop className="fixed inset-0 bg-black/30 dark:bg-black/70" />
-      
       <div className="fixed inset-0 flex items-center justify-center p-4">
-        <DialogPanel className="w-full max-w-md rounded-xl bg-white dark:bg-gray-900 shadow-xl">
-          <div className="p-6">
+        <DialogPanel className="w-full max-w-md rounded-xl bg-white dark:bg-gray-900 shadow-xl p-2">
+          <div className="p-2">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">Share</h2>
               <button
@@ -30,12 +29,12 @@ const ShareDialog = ({ onClose, isOpen }: SharePopupProps) => {
               </button>
             </div>
 
-            <div className="h-[60vh] overflow-y-auto">
+            <div className="h-[55vh] overflow-y-auto">
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
-                {socialIcons.map(({ Icon, name }) => (
+                {socialIcons?.map(({ Icon, name }) => (
                   <button
                     key={name}
-                    className="flex flex-col items-center rounded-lg p-3 transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
+                    className="flex flex-col items-center rounded-lg p-3 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
                     aria-label={`Share on ${name}`}
                   >
                     <Icon size={40} round />

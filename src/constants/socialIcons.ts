@@ -37,7 +37,7 @@ export const socialIcons = [
   { Icon: LinkedinIcon, name: "LinkedIn" },
   { Icon: LivejournalIcon, name: "LiveJournal" },
   { Icon: MailruIcon, name: "Mail.ru" },
-  { Icon: OKIcon, name: "Odnoklassniki" },
+  { Icon: OKIcon, name: "Odnok" },
   { Icon: PinterestIcon, name: "Pinterest" },
   { Icon: PocketIcon, name: "Pocket" },
   { Icon: RedditIcon, name: "Reddit" },
