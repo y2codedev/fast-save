@@ -15,7 +15,7 @@ export default function HeroSection() {
                 <div className="flex-shrink-0 bg-indigo-100 dark:bg-indigo-900/30 p-2 rounded-lg">
                   <feature.icon className="h-6 w-6 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
                 </div>
-                <h3 className="ml-3 text-lg font-medium text-gray-900 dark:text-white">{feature?.name}</h3>
+                <h2 className="ml-3 text-sm font-medium text-gray-900 dark:text-white">{feature?.name}</h2>
               </div>
               <p className="mt-2 text-gray-600 dark:text-gray-400">{feature?.description}</p>
             </div>
