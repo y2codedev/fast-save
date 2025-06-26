@@ -17,7 +17,7 @@ const TopText = () => {
                 )}
                 {content?.title.split(content?.highlight || '')[1]}
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
+            <p className="mt-6 sm:text-lg text-sm leading-8 text-gray-600 dark:text-gray-300">
                 {content?.description}
             </p>
         </div>
