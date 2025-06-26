@@ -11,7 +11,7 @@ interface MediaItem {
   title?: string;
 }
 
- const usePinterestDownloader = () => {
+const usePinterestDownloader = () => {
   const [pinterestUrl, setPinterestUrl] = useState('');
   const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +38,7 @@ interface MediaItem {
           method: 'GET',
           headers: {
             'x-rapidapi-host': 'pinterest-video-and-image-downloader.p.rapidapi.com',
-            'x-rapidapi-key': RAPIDAPI_KEY,
+            'x-rapidapi-key': RAPIDAPI_KEY || '5da58acae9mshaca9e06ba0032afp175489jsn9e4219e979ab',
           },
         }
       );

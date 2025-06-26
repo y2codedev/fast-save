@@ -8,10 +8,11 @@ export async function downloadVideo(formData: FormData): Promise<ReelResultProps
 
         const url = formData.get('url') as string;
 
-        const response = await fetch('http://localhost:3000/api/download', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/download`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ url }),
+            cache:"no-store"
         });
 
         if (!response.ok) {
