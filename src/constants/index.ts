@@ -17,6 +17,8 @@ import Toast from '@/lib/tost';
 import usePinterestDownloader from '@/hooks/usePinterestDownloader';
 import useBackgroundRemover from '@/hooks/useBackgroundRemover';
 import InputField from '@/components/sections/InputField';
+import ShareDialog from '@/components/ui/ShareDialog';
+
 
 
 export type { SocialLink, LegalLink, FooterProps } from './types';
@@ -40,5 +42,6 @@ export {
     Toast,
     InputField,
     usePinterestDownloader,
-    useBackgroundRemover
+    useBackgroundRemover,
+    ShareDialog
 };

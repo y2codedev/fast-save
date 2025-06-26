@@ -7,7 +7,7 @@ import { NAVITEMS } from '@/constants/data';
 import { useState } from 'react';
 import { Dialog, DialogPanel, DialogBackdrop } from '@headlessui/react';
 import { ChevronRightIcon } from 'lucide-react';
-import ShareDialog from '../ui/ShareDialog';
+import { ShareDialog } from '@/constants';
 
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
