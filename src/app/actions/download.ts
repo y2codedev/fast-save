@@ -3,11 +3,8 @@
 import { ReelResultProps } from "@/constants/types";
 
 export async function downloadVideo(formData: FormData): Promise<ReelResultProps> {
-
     try {
-
         const url = formData.get('url') as string;
-
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/download`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
