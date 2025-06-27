@@ -1,0 +1,424 @@
+"use client";
+
+import { FiUploadCloud } from "react-icons/fi";
+import { LuFileSymlink } from "react-icons/lu";
+import { MdClose } from "react-icons/md";
+import ReactDropzone from "react-dropzone";
+import bytesToSize from "@/utils/bytes-to-size";
+import fileToIcon from "@/utils/file-to-icon";
+import { useState, useEffect, useRef } from "react";
+import compressFileName from "@/utils/compress-file-name";
+import { Skeleton } from "@/components/ui/skeleton";
+import convertFile from "@/utils/convert";
+import { ImSpinner3 } from "react-icons/im";
+import { MdDone } from "react-icons/md";
+import { Badge } from "@/components/ui/badge";
+import { HiOutlineDownload } from "react-icons/hi";
+import { BiError } from "react-icons/bi";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Button } from "@/constants";
+import loadFfmpeg from "@/utils/load-ffmpeg";
+import type { Action } from "@/constants/types";
+import { FFmpeg } from "@ffmpeg/ffmpeg";
+import { Toast } from "@/constants";
+
+const extensions = {
+  image: [
+    "jpg",
+    "jpeg",
+    "png",
+    "gif",
+    "bmp",
+    "webp",
+    "ico",
+    "tif",
+    "tiff",
+    "svg",
+    "raw",
+    "tga",
+  ],
+  video: [
+    "mp4",
+    "m4v",
+    "mp4v",
+    "3gp",
+    "3g2",
+    "avi",
+    "mov",
+    "wmv",
+    "mkv",
+    "flv",
+    "ogv",
+    "webm",
+    "h264",
+    "264",
+    "hevc",
+    "265",
+  ],
+  audio: ["mp3", "wav", "ogg", "aac", "wma", "flac", "m4a"],
+};
+
+export default function Dropzone() {
+  // variables & hooks
+  const [is_hover, setIsHover] = useState<boolean>(false);
+  const [actions, setActions] = useState<Action[]>([]);
+  const [is_ready, setIsReady] = useState<boolean>(false);
+  const [files, setFiles] = useState<Array<any>>([]);
+  const [is_loaded, setIsLoaded] = useState<boolean>(false);
+  const [is_converting, setIsConverting] = useState<boolean>(false);
+  const [is_done, setIsDone] = useState<boolean>(false);
+  const ffmpegRef = useRef<any>(null);
+  const [defaultValues, setDefaultValues] = useState<string>("video");
+  const [selcted, setSelected] = useState<string>("...");
+  const accepted_files = {
+    "image/*": [
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".gif",
+      ".bmp",
+      ".webp",
+      ".ico",
+      ".tif",
+      ".tiff",
+      ".raw",
+      ".tga",
+    ],
+    "audio/*": [],
+    "video/*": [],
+  };
+
+  // functions
+  const reset = () => {
+    setIsDone(false);
+    setActions([]);
+    setFiles([]);
+    setIsReady(false);
+    setIsConverting(false);
+  };
+  const downloadAll = (): void => {
+    for (let action of actions) {
+      !action.is_error && download(action);
+    }
+  };
+  const download = (action: Action) => {
+    const a = document.createElement("a");
+    a.style.display = "none";
+    a.href = action.url;
+    a.download = action.output;
+
+    document.body.appendChild(a);
+    a.click();
+
+    // Clean up after download
+    URL.revokeObjectURL(action.url);
+    document.body.removeChild(a);
+  };
+  const convert = async (): Promise<any> => {
+    let tmp_actions = actions.map((elt) => ({
+      ...elt,
+      is_converting: true,
+    }));
+    setActions(tmp_actions);
+    setIsConverting(true);
+    for (let action of tmp_actions) {
+      try {
+        const { url, output } = await convertFile(ffmpegRef.current, action);
+        tmp_actions = tmp_actions.map((elt) =>
+          elt === action
+            ? {
+              ...elt,
+              is_converted: true,
+              is_converting: false,
+              url,
+              output,
+            }
+            : elt
+        );
+        setActions(tmp_actions);
+      } catch (err) {
+        tmp_actions = tmp_actions.map((elt) =>
+          elt === action
+            ? {
+              ...elt,
+              is_converted: false,
+              is_converting: false,
+              is_error: true,
+            }
+            : elt
+        );
+        setActions(tmp_actions);
+      }
+    }
+    setIsDone(true);
+    setIsConverting(false);
+  };
+  const handleUpload = (data: Array<any>): void => {
+    handleExitHover();
+    setFiles(data);
+    const tmp: Action[] = [];
+    data.forEach((file: any) => {
+      const formData = new FormData();
+      tmp.push({
+        file_name: file.name,
+        file_size: file.size,
+        from: file.name.slice(((file.name.lastIndexOf(".") - 1) >>> 0) + 2),
+        to: null,
+        file_type: file.type,
+        file,
+        is_converted: false,
+        is_converting: false,
+        is_error: false,
+      });
+    });
+    setActions(tmp);
+  };
+  const handleHover = (): void => setIsHover(true);
+  const handleExitHover = (): void => setIsHover(false);
+  const updateAction = (fileName: string, to: string) => {
+    setActions(prev =>
+      prev.map(action =>
+        action.file_name === fileName ? { ...action, to } : action
+      )
+    );
+  };
+  const checkIsReady = (): void => {
+    let tmp_is_ready = true;
+    actions.forEach((action: Action) => {
+      if (!action.to) tmp_is_ready = false;
+    });
+    setIsReady(tmp_is_ready);
+  };
+  const deleteAction = (action: Action): void => {
+    setActions(actions.filter((elt) => elt !== action));
+    setFiles(files.filter((elt) => elt.name !== action.file_name));
+  };
+  useEffect(() => {
+    if (!actions.length) {
+      setIsDone(false);
+      setFiles([]);
+      setIsReady(false);
+      setIsConverting(false);
+    } else checkIsReady();
+  }, [actions]);
+  useEffect(() => {
+    load();
+  }, []);
+  const load = async () => {
+    try {
+      const ffmpeg_response: FFmpeg = await loadFfmpeg();
+      ffmpegRef.current = ffmpeg_response;
+      setIsLoaded(true);
+    } catch (error) {
+      console.error("Failed to load FFmpeg:", error);
+      Toast("error", "FFmpeg failed to load. Please refresh.");
+    }
+  };
+
+  // returns
+  if (actions.length) {
+    return (
+      <div className="space-y-6">
+        {actions.map((action: Action, i: any) => (
+          <div
+            key={i}
+            className="w-full py-4 space-y-2 lg:py-0 relative cursor-pointer rounded-xl border h-fit lg:h-20 px-4 lg:px-10 flex flex-wrap lg:flex-nowrap items-center justify-between"
+          >
+            {!is_loaded && (
+              <Skeleton className="h-full w-full -ml-10 cursor-progress absolute rounded-xl" />
+            )}
+            <div className="flex gap-4 items-center">
+              <span className="text-2xl text-orange-600">
+                {fileToIcon(action.file_type)}
+              </span>
+              <div className="flex items-center gap-1 w-96">
+                <span className="text-md font-medium overflow-x-hidden">
+                  {compressFileName(action.file_name)}
+                </span>
+                <span className="text-muted-foreground text-sm">
+                  ({bytesToSize(action.file_size)})
+                </span>
+              </div>
+            </div>
+
+            {action.is_error ? (
+              <Badge variant="destructive" className="flex gap-2">
+                <span>Error Converting File</span>
+                <BiError />
+              </Badge>
+            ) : action.is_converted ? (
+              <Badge variant="default" className="flex gap-2 bg-green-500">
+                <span>Done</span>
+                <MdDone />
+              </Badge>
+            ) : action.is_converting ? (
+              <Badge variant="default" className="flex gap-2">
+                <span>Converting</span>
+                <span className="animate-spin">
+                  <ImSpinner3 />
+                </span>
+              </Badge>
+            ) : (
+              <div className="text-muted-foreground text-md flex items-center gap-4">
+                <span>Convert to</span>
+                <Select defaultValue="Select Formate"
+                  onValueChange={(value) => {
+                    if (extensions.audio.includes(value)) {
+                      setDefaultValues("audio");
+                    } else if (extensions.video.includes(value)) {
+                      setDefaultValues("video");
+                    }
+                    setSelected(value);
+                    updateAction(action.file_name, value);
+                  }}
+                  value={selcted}
+                >
+                  <SelectTrigger className="w-32 outline-none focus:outline-none focus:ring-0 text-center text-muted-foreground bg-background text-md font-medium">
+                    <SelectValue placeholder="..." />
+                  </SelectTrigger>
+                  <SelectContent className="h-fit">
+                    {action.file_type.includes("image") && (
+                      <div className="grid grid-cols-2 gap-2 w-fit">
+                        {extensions.image.map((elt, i) => (
+                          <div key={i} className="col-span-1 text-center">
+                            <SelectItem value={elt} className="mx-auto">
+                              {elt}
+                            </SelectItem>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {action.file_type.includes("video") && (
+                      <Tabs defaultValue={defaultValues} className="w-full">
+                        <TabsList className="w-full">
+                          <TabsTrigger value="video" className="w-full">
+                            Video
+                          </TabsTrigger>
+                          <TabsTrigger value="audio" className="w-full">
+                            Audio
+                          </TabsTrigger>
+                        </TabsList>
+                        <TabsContent value="video">
+                          <div className="grid grid-cols-3 gap-2 w-fit">
+                            {extensions.video.map((elt, i) => (
+                              <div key={i} className="col-span-1 text-center">
+                                <SelectItem value={elt} className="mx-auto">
+                                  {elt}
+                                </SelectItem>
+                              </div>
+                            ))}
+                          </div>
+                        </TabsContent>
+                        <TabsContent value="audio">
+                          <div className="grid grid-cols-3 gap-2 w-fit">
+                            {extensions.audio.map((elt, i) => (
+                              <div key={i} className="col-span-1 text-center">
+                                <SelectItem value={elt} className="mx-auto">
+                                  {elt}
+                                </SelectItem>
+                              </div>
+                            ))}
+                          </div>
+                        </TabsContent>
+                      </Tabs>
+                    )}
+                    {action.file_type.includes("audio") && (
+                      <div className="grid grid-cols-2 gap-2 w-fit">
+                        {extensions.audio.map((elt, i) => (
+                          <div key={i} className="col-span-1 text-center">
+                            <SelectItem value={elt} className="mx-auto">
+                              {elt}
+                            </SelectItem>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+            {action.is_converted ? (
+              <Button labal=" Download" icon={true} onClick={() => download(action)} />
+            ) : (
+              <span
+                onClick={() => deleteAction(action)}
+                className="cursor-pointer hover:dark:bg-gray-700 hover:bg-gray-200 rounded-full h-10 w-10 flex items-center justify-center text-2xl text-foreground"
+              >
+                <MdClose />
+              </span>
+            )}
+          </div>
+        ))}
+        <div className="flex w-full justify-end">
+          {is_done ? (
+            <div className="space-y-4 flex-col w-fit rounded-md">
+              <Button
+                onClick={reset}
+                labal="Convert Another File(s)"
+              />
+            </div>
+          ) : (
+            <Button
+              onClick={convert}
+              labal='Convert Now'
+            />
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <ReactDropzone
+      onDrop={handleUpload}
+      onDragEnter={handleHover}
+      onDragLeave={handleExitHover}
+      accept={accepted_files}
+      onDropRejected={() => {
+        handleExitHover();
+        Toast("error", "Error uploading your file(s)")
+      }}
+      onError={() => {
+        handleExitHover();
+        Toast("error", "Error uploading your file(s)")
+      }}
+    >
+      {({ getRootProps, getInputProps }) => (
+        <div
+          {...getRootProps()}
+          className=" bg-background h-72 lg:h-80 xl:h-96 rounded-3xl shadow-sm border-secondary border-2 border-dashed cursor-pointer flex items-center justify-center"
+        >
+          <input {...getInputProps()} />
+          <div className="space-y-4 text-foreground">
+            {is_hover ? (
+              <>
+                <div className="justify-center flex text-6xl">
+                  <LuFileSymlink />
+                </div>
+                <h3 className="text-center font-medium text-2xl">
+                  Yes, right there
+                </h3>
+              </>
+            ) : (
+              <>
+                <div className="justify-center flex text-6xl">
+                  <FiUploadCloud />
+                </div>
+                <h3 className="text-center font-medium sm:text-xl text-sm ">
+                  Click, or drop your files here
+                </h3>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </ReactDropzone>
+  );
+}

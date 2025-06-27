@@ -3,7 +3,7 @@ import "./globals.css";
 import { Suspense } from 'react';
 import { Navbar, Footer, LegalDisclaimer, FallbackLoader, HeroSection, DownloadSteps, ThemeProviderWrapper, ToastProvider } from "@/constants";
 import { Inter } from "next/font/google";
-
+import GA from "@/components/image-converter/GA";
 export const generateMetadata = (): Metadata => {
   const title = "FastSave – Download HD Videos, Photos & Audio Without Watermark | Instagram, Facebook, Pinterest";
   const description = "FastSave is your ultimate download tool for saving high-quality videos, photos, audio, and stories from popular platforms like Instagram, Facebook, Pinterest, and more. Enjoy blazing-fast downloads with no watermarks, batch processing, and multiple format options (MP4, MP3, etc.). Whether you need to save reels, FB videos, or remove backgrounds, FastSave delivers seamless, HD-quality downloads in seconds. Try it now for free!";
@@ -56,6 +56,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
+      <GA GA_MEASUREMENT_ID="G-52GQ441X7H" />
+      <meta name="google-site-verification" content="V8lmEvFOdYBlChgR6pYABBZBhI1EFnPb1YuxTTdHXMU" />
       <body>
         <ThemeProviderWrapper>
           <Navbar />

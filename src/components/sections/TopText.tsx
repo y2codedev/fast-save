@@ -11,7 +11,7 @@ const TopText = () => {
             <h1 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
                 {content?.title.split(content.highlight || '')[0]}
                 {content?.highlight && (
-                    <span className="text-indigo-600 ">
+                    <span className="text-indigo-600 ml-2 ">
                         {content?.highlight}
                     </span>
                 )}
