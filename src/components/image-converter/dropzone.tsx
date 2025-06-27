@@ -1,5 +1,6 @@
 "use client";
 
+// imports
 import { FiUploadCloud } from "react-icons/fi";
 import { LuFileSymlink } from "react-icons/lu";
 import { MdClose } from "react-icons/md";
@@ -23,7 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/constants";
+import { Button } from  "@/components/ui/button"
 import loadFfmpeg from "@/utils/load-ffmpeg";
 import type { Action } from "@/constants/types";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
@@ -134,12 +135,12 @@ export default function Dropzone() {
         tmp_actions = tmp_actions.map((elt) =>
           elt === action
             ? {
-              ...elt,
-              is_converted: true,
-              is_converting: false,
-              url,
-              output,
-            }
+                ...elt,
+                is_converted: true,
+                is_converting: false,
+                url,
+                output,
+              }
             : elt
         );
         setActions(tmp_actions);
@@ -147,11 +148,11 @@ export default function Dropzone() {
         tmp_actions = tmp_actions.map((elt) =>
           elt === action
             ? {
-              ...elt,
-              is_converted: false,
-              is_converting: false,
-              is_error: true,
-            }
+                ...elt,
+                is_converted: false,
+                is_converting: false,
+                is_error: true,
+              }
             : elt
         );
         setActions(tmp_actions);
@@ -182,11 +183,19 @@ export default function Dropzone() {
   };
   const handleHover = (): void => setIsHover(true);
   const handleExitHover = (): void => setIsHover(false);
-  const updateAction = (fileName: string, to: string) => {
-    setActions(prev =>
-      prev.map(action =>
-        action.file_name === fileName ? { ...action, to } : action
-      )
+  const updateAction = (file_name: String, to: String) => {
+    setActions(
+      actions.map((action): Action => {
+        if (action.file_name === file_name) {
+          console.log("FOUND");
+          return {
+            ...action,
+            to,
+          };
+        }
+
+        return action;
+      })
     );
   };
   const checkIsReady = (): void => {
@@ -212,14 +221,9 @@ export default function Dropzone() {
     load();
   }, []);
   const load = async () => {
-    try {
-      const ffmpeg_response: FFmpeg = await loadFfmpeg();
-      ffmpegRef.current = ffmpeg_response;
-      setIsLoaded(true);
-    } catch (error) {
-      console.error("Failed to load FFmpeg:", error);
-      Toast("error", "FFmpeg failed to load. Please refresh.");
-    }
+    const ffmpeg_response: FFmpeg = await loadFfmpeg();
+    ffmpegRef.current = ffmpeg_response;
+    setIsLoaded(true);
   };
 
   // returns
@@ -268,8 +272,8 @@ export default function Dropzone() {
             ) : (
               <div className="text-muted-foreground text-md flex items-center gap-4">
                 <span>Convert to</span>
-                <Select defaultValue="Select Formate"
-                  onValueChange={(value) => {
+                <Select
+                  onValueChange={(value:any) => {
                     if (extensions.audio.includes(value)) {
                       setDefaultValues("audio");
                     } else if (extensions.video.includes(value)) {
@@ -344,12 +348,15 @@ export default function Dropzone() {
                 </Select>
               </div>
             )}
+
             {action.is_converted ? (
-              <Button labal=" Download" icon={true} onClick={() => download(action)} />
+              <Button variant="outline" onClick={() => download(action)}>
+                Download
+              </Button>
             ) : (
               <span
                 onClick={() => deleteAction(action)}
-                className="cursor-pointer hover:dark:bg-gray-700 hover:bg-gray-200 rounded-full h-10 w-10 flex items-center justify-center text-2xl text-foreground"
+                className="cursor-pointer hover:bg-muted rounded-full h-10 w-10 flex items-center justify-center text-2xl text-foreground"
               >
                 <MdClose />
               </span>
@@ -358,17 +365,31 @@ export default function Dropzone() {
         ))}
         <div className="flex w-full justify-end">
           {is_done ? (
-            <div className="space-y-4 flex-col w-fit rounded-md">
+            <div className="space-y-4 w-fit">
               <Button
+                size="lg"
                 onClick={reset}
-                labal="Convert Another File(s)"
-              />
+                variant="outline"
+                className="rounded-xl"
+              >
+                Convert Another File(s)
+              </Button>
             </div>
           ) : (
             <Button
+              size="lg"
+              disabled={!is_ready || is_converting}
+              className="rounded-xl font-semibold relative  py-4 text-md flex items-center w-44"
               onClick={convert}
-              labal='Convert Now'
-            />
+            >
+              {is_converting ? (
+                <span className="animate-spin text-lg">
+                  <ImSpinner3 />
+                </span>
+              ) : (
+                <span className="px-3 cursor-pointer py-2 border border-transparent text-xs font-medium rounded-[8px] text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed">Convert Now</span>
+              )}
+            </Button>
           )}
         </div>
       </div>
@@ -383,11 +404,11 @@ export default function Dropzone() {
       accept={accepted_files}
       onDropRejected={() => {
         handleExitHover();
-        Toast("error", "Error uploading your file(s)")
+        Toast("error","Error uploading your file(s)")
       }}
       onError={() => {
         handleExitHover();
-        Toast("error", "Error uploading your file(s)")
+       Toast("error","Error uploading your file(s)")
       }}
     >
       {({ getRootProps, getInputProps }) => (
@@ -411,7 +432,7 @@ export default function Dropzone() {
                 <div className="justify-center flex text-6xl">
                   <FiUploadCloud />
                 </div>
-                <h3 className="text-center font-medium sm:text-xl text-sm ">
+                <h3 className="text-center font-medium text-2xl">
                   Click, or drop your files here
                 </h3>
               </>
