@@ -43,7 +43,7 @@ const Navbar = () => {
             {NAVITEMS.map((item) => (
               <li key={item.id} className="shrink-0">
                 <Link href={item.href} className="group">
-                  <div className="flex flex-col hover:bg-gray-100  dark:text-white hover:text-indigo-600 dark:hover:bg-gray-800  px-2 py-2 rounded-md items-center  gap-1 transition-colors duration-200 text-gray-900 ">
+                  <div className="flex flex-col hover:bg-gray-200  dark:text-white text-gray-600 hover:text-gray-800 dark:hover:bg-gray-800  px-2 py-2 rounded-md items-center  gap-1 transition-colors duration-200  ">
                     <span >
                       {item.ariaLabel}
                     </span>

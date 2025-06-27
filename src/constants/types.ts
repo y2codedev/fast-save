@@ -100,3 +100,26 @@ export type Action = {
   url?: any;
   output?: any;
 };
+
+
+export interface ImageKitUploadResponse {
+  fileId: string;
+  name: string;
+  size: number;
+  versionInfo: {
+    id: string;
+    name: string;
+  };
+  filePath: string;
+  url: string;
+  fileType: string;
+  height: number;
+  width: number;
+  thumbnailUrl: string;
+  AITags: null | any[];
+}
+
+export interface BackgroundRemoverProps {
+  apiKey?: string; 
+  endpoint?: string;
+}
