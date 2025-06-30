@@ -14,14 +14,14 @@
 //             transformation: [{
 //                 effect: "bg-remove",
 //                 format: "png",
-//                 quality: "90", 
-//                 width: "2000",  
+//                 quality: "90",
+//                 width: "2000",
 //                 height: "2000",
 //                 effectExtend: {
 //                     name: "bg-remove",
 //                     options: {
 //                         bg_color: "transparent",
-//                         tolerance: 15  
+//                         tolerance: 15
 //                     }
 //                 }
 //             }]
