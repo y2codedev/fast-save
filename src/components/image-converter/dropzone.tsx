@@ -1,6 +1,5 @@
 "use client";
 
-// imports
 import { FiUploadCloud } from "react-icons/fi";
 import { LuFileSymlink } from "react-icons/lu";
 import { MdClose } from "react-icons/md";
@@ -14,7 +13,6 @@ import convertFile from "@/utils/convert";
 import { ImSpinner3 } from "react-icons/im";
 import { MdDone } from "react-icons/md";
 import { Badge } from "@/components/ui/badge";
-import { HiOutlineDownload } from "react-icons/hi";
 import { BiError } from "react-icons/bi";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
