@@ -1,28 +1,26 @@
-// import type { NextApiRequest, NextApiResponse } from 'next';
-// import axios from 'axios';
+import { NextRequest, NextResponse } from 'next/server';
+import axios from 'axios';
 
-// export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-//     const { query } = req.query;
+export async function GET(req: NextRequest) {
+    const { searchParams } = new URL(req.url);
+    const query = searchParams.get('query');
 
-//     if (!query || typeof query !== 'string') {
-//         return res.status(400).json({ error: 'Missing or invalid query parameter.' });
-//     }
+    if (!query) {
+        return NextResponse.json({ error: 'Missing query parameter' }, { status: 400 });
+    }
 
-//     try {
-//         const response = await axios.get('https://full-downloader-social-media.p.rapidapi.com/api', {
-//             params: { url: query }, 
-//             headers: {
-//                 'X-RapidAPI-Key': '5da58acae9mshaca9e06ba0032afp175489jsn9e4219e979ab',
-//                 'X-RapidAPI-Host': 'full-downloader-social-media.p.rapidapi.com'
-//             }
-//         });
+    try {
+        const url = 'https://full-downloader-social-media.p.rapidapi.com'
+        const response = await axios.get(url, {
+            params: { url: query },
+            headers: {
+                'X-RapidAPI-Key': '5da58acae9mshaca9e06ba0032afp175489jsn9e4219e979ab',
+                'X-RapidAPI-Host': 'full-downloader-social-media.p.rapidapi.com'
+            }
+        });
 
-//         res.status(200).json(response.data);
-//     } catch (error: any) {
-//         console.error('Scraper API error:', error?.response?.data || error.message);
-//         res.status(500).json({ 
-//             error: 'Failed to fetch data from scraper API.',
-//             details: error?.response?.data || error.message 
-//         });
-//     }
-// }
+        return NextResponse.json(response.data);
+    } catch (error: any) {
+        return NextResponse.json({ error: error?.message || 'Error fetching video data' }, { status: 500 });
+    }
+}
