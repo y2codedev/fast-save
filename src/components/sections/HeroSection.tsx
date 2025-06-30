@@ -4,7 +4,7 @@ import { FEATURES, TopText } from '@/constants';
 export default function HeroSection() {
   return (
     <div className="bg-white dark:bg-gray-900 px-4  ">
-      <div className='py-20'>
+      <div className='md:py-20 py-10'>
         <TopText />
       </div>
       <div className="mx-auto max-w-7xl  pb-24">
