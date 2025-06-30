@@ -17,7 +17,7 @@ export default function HeroSection() {
                 </div>
                 <h2 className="ml-3 text-sm font-medium text-gray-900 dark:text-white">{feature?.name}</h2>
               </div>
-              <p className="mt-2 text-gray-600 dark:text-gray-400">{feature?.description}</p>
+              <p className="mt-2  md:text-sm text-xs  text-gray-600 dark:text-gray-400">{feature?.description}</p>
             </div>
           ))}
         </div>
