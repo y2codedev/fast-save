@@ -144,121 +144,171 @@ function VideoToAudioConverter() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 ">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg h-fit">
-          <h2 className="text-xl font-semibold mb-4">Video to Audio Converter</h2>
-          <div className="mb-6">
-            <label className="block mb-2 text-sm font-medium">
-              Upload Video File
-            </label>
-            <div className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg p-8 text-center cursor-pointer hover:border-gray-400 dark:hover:border-gray-600 transition-colors">
-              <input
-                type="file"
-                accept="video/*"
-                onChange={handleFileChange}
-                className="hidden"
-                id="video-upload"
-              />
-              <label htmlFor="video-upload" className="cursor-pointer">
-                <FiUpload className="mx-auto text-3xl mb-2 text-gray-500" />
-                <p className="text-sm text-gray-500">
-                  {videoFile ? videoFile.name : 'Click to browse or drag and drop'}
-                </p>
-              </label>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Video to Audio Converter</h1>
+          <p className="text-lg text-gray-600 dark:text-gray-300">
+            Convert your videos to high-quality MP3 files with embedded metadata
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="bg-white dark:bg-gray-800 h-fit rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl">
+            <div className="p-6 sm:p-8 ">
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center">
+                <FiUpload className="mr-2" /> Upload & Convert
+              </h2>
+
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                  Select Video File
+                </label>
+                <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-10 text-center transition-all duration-200 hover:border-indigo-500 dark:hover:border-indigo-400 bg-gray-50 dark:bg-gray-700/50">
+                  <input
+                    type="file"
+                    accept="video/*"
+                    onChange={handleFileChange}
+                    className="hidden"
+                    id="video-upload"
+                  />
+                  <label htmlFor="video-upload" className="cursor-pointer flex flex-col items-center justify-center space-y-3">
+                    <div className="w-16 h-16 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center">
+                      <FiUpload className="text-2xl text-indigo-600 dark:text-indigo-400" />
+                    </div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {videoFile ? (
+                        <span className="font-medium text-indigo-600 dark:text-indigo-400">{videoFile.name}</span>
+                      ) : (
+                        <>
+                          <span className="font-medium text-gray-700 dark:text-gray-300">Drag & drop files or</span>{' '}
+                          <span className="text-indigo-600 dark:text-indigo-400 underline">browse</span>
+                        </>
+                      )}
+                    </p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500">
+                      MP4, WebM, AVI, MOV (Max 100MB)
+                    </p>
+                  </label>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8">
+                <div className="w-full sm:w-auto">
+                  <Button
+                    onClick={convertToAudio}
+                    isProcessing={isLoading}
+                    labal='Convert to MP3'
+                  />
+                </div>
+
+                {audioURL && (
+                  <a
+                    href={audioURL}
+                    download="converted-audio.mp3"
+                    className="flex items-center  px-4 py-2  text-sm font-medium rounded-[8px] text-white bg-indigo-600 hover:bg-indigo-700"
+                  >
+                    <FiDownload className="mr-1" /> Download
+                  </a>
+                )}
+              </div>
+
+              <audio ref={audioRef} src={audioURL} className="hidden" />
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-2">
-            <Button
-              onClick={convertToAudio}
-              isProcessing={isLoading}
-              labal='Convert to MP3'
-            />
-            {audioURL && (
-              <div className="flex items-center justify-end ">
-                <a
-                  href={audioURL}
-                  download="converted-audio.mp3"
-                  className="flex items-center  px-4 py-2  text-sm font-medium rounded-[8px] text-white bg-indigo-600 hover:bg-indigo-700"
-                >
-                  <FiDownload className="mr-1" /> Download
-                </a>
-                <audio ref={audioRef} src={audioURL} className="hidden" />
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl">
+            <div className="p-6 sm:p-8">
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center">
+                <FiMusic className="mr-2" /> Music Player
+              </h2>
+
+              <div className="mb-8">
+                {albumArt ? (
+                  <div className="relative aspect-square w-full  mx-auto rounded-xl overflow-hidden shadow-lg">
+                    <Image
+                      src={albumArt}
+                      alt="Album art"
+                      fill
+                      quality={100}
+                      priority
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                      <span className="text-white font-medium text-sm">{videoFile?.name.replace(/\.[^/.]+$/, "")}</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="aspect-square w-full  mx-auto rounded-xl bg-white dark:bg-gray-800 flex items-center justify-center">
+                    <FiMusic className="text-6xl text-gray-400 dark:text-gray-500" />
+                  </div>
+                )}
               </div>
-            )}
+
+              {audioURL && (
+                <div className="mb-8">
+                  <div className="flex items-center justify-center mb-6">
+                    <button
+                      onClick={togglePlayback}
+                      className="p-4 rounded-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-600 text-white shadow-lg transform transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    >
+                      {isPlaying ? (
+                        <FiPause size={28} className="flex-shrink-0" />
+                      ) : (
+                        <FiPlay size={28} className="flex-shrink-0 ml-1" />
+                      )}
+                    </button>
+                  </div>
+
+                  <div className="space-y-2">
+                    <input
+                      type="range"
+                      min="0"
+                      max={duration || 100}
+                      value={currentTime}
+                      onChange={handleSeek}
+                      className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full appearance-none cursor-pointer accent-indigo-600"
+                      style={{
+                        backgroundImage: `linear-gradient(to right, #4f46e5 ${(currentTime / (duration || 100)) * 100}%, #d1d5db ${(currentTime / (duration || 100)) * 100}%)`
+                      }}
+                    />
+                    <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                      <span>{formatTime(currentTime)}</span>
+                      <span>{formatTime(duration)}</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div>
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                  </svg>
+                  Lyrics
+                </h3>
+                <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 h-48 overflow-y-auto">
+                  <pre className="font-sans text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
+                    {lyrics}
+                  </pre>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg ">
-          <h2 className="text-xl font-semibold mb-4">Music Details</h2>
+        {/* Status Message */}
+        {messageRef.current && (
+          <p
+            ref={messageRef}
+            className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400 italic"
+          />
+        )}
 
-          {albumArt ? (
-            <div className="mb-6 flex justify-center">
-              <div className="w-full h-64 relative rounded-lg overflow-hidden">
-                <Image
-                  src={albumArt}
-                  alt="Album art"
-                  fill
-                  quality={80}
-                  priority
-                  className="object-cover"
-                />
-              </div>
-            </div>
-          ) : (
-            <div className="mb-6 flex justify-center items-center w-64 h-64  mx-auto rounded-lg dark:bg-gray-800">
-              <FiMusic className="text-4xl text-gray-600" />
-            </div>
-          )}
-
-          {audioURL && (
-            <div className="mb-6">
-              <div className="flex items-center justify-center mb-4">
-                <button
-                  onClick={togglePlayback}
-                  className="p-3 rounded-full bg-indigo-600 hover:bg-indigo-600 dark:bg-indigo-700 dark:hover:bg-indigo-700 text-white shadow-md transition-colors"
-                >
-                  {isPlaying ? <FiPause size={24} /> : <FiPlay size={24} />}
-                </button>
-              </div>
-
-              <div className="flex items-center justify-between mb-1 text-xs text-gray-500">
-                <span>{formatTime(currentTime)}</span>
-                <span>{formatTime(duration)}</span>
-              </div>
-
-              <input
-                type="range"
-                min="0"
-                max={duration || 100}
-                value={currentTime}
-                onChange={handleSeek}
-                className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
-                style={{
-                  backgroundImage: `linear-gradient(to right, #4338ca ${(currentTime / (duration || 100)) * 100}%, transparent ${(currentTime / (duration || 100)) * 100}%)`
-                }}
-              />
-            </div>
-          )}
-
-          <div>
-            <h3 className="text-lg font-medium mb-2">Lyrics</h3>
-            <div
-              className="p-4 rounded-lg h-fit whitespace-pre-line  border-gray-300 dark:bg-gray-800 border dark:border-gray-700  text-gray-700 dark:text-gray-300"
-            >
-              {lyrics}
-            </div>
-          </div>
+        <div className="mt-12 text-center text-sm text-gray-500 dark:text-gray-400">
+          <p>Note: Conversion happens in your browser. Your files are never uploaded to any server.</p>
         </div>
       </div>
-
-      {messageRef.current && (
-        <p
-          ref={messageRef}
-          className="mt-4 text-sm text-center text-gray-500 dark:text-gray-400"
-        />
-      )}
     </div>
   );
 }
