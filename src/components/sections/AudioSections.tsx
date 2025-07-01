@@ -4,10 +4,10 @@ import { Button, Loader } from "@/constants";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
 import Image from "next/image";
-import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 import { FiUpload, FiMusic, FiDownload, FiPlay, FiPause } from "react-icons/fi";
-import AudioLoader from "../ui/audioLoader";
+import AudioLoader from "../ui/AudioLoader";
+
 
 function VideoToAudioConverter() {
   const ffmpegRef = useRef(new FFmpeg());
