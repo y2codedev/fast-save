@@ -1,10 +1,6 @@
-import ComingSoonBanner from '@/components/ui/ComingSoonBanner'
-import React from 'react'
+import NoSSRWrapper from "@/components/sections/NoSSRWrapper";
+import AudioSections from "@/components/sections/AudioSections";
 
-const page = () => {
-    return (
-        <ComingSoonBanner />
-    )
+export default function Page() {
+    return <div className="bg-white dark:bg-gray-900"><NoSSRWrapper><AudioSections /></NoSSRWrapper></div>
 }
-
-export default page

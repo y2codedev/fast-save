@@ -4,12 +4,12 @@ const nextConfig: NextConfig = {
   reactStrictMode: false,
   swcMinify: false,
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "oaidalleapiprodscus.blob.core.windows.net",
-      },
+    loader: 'custom',
+    loaderFile: './src/components/ui/FallbackLoader.tsx',
+    domains: [
+      'cdn.pixabay.com',
     ],
+    minimumCacheTTL: 60,
   },
 };
 

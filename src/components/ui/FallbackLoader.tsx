@@ -4,7 +4,7 @@ import React from 'react';
 
 const FallbackLoader = () => {
     return (
-       <div className=' min-h-screen flex justify-center items-center'>
+       <div className=' min-h-screen flex justify-center items-center bg-white  dark:bg-gray-900'>
          <div className="relative w-[24px] h-[24px]">
             {[...Array(12)]?.map((_, i) => (
                 <div

@@ -194,12 +194,12 @@ export const NAVITEMS: SocialLink[] = [
         icon: ScissorsIcon,
         ariaLabel: 'Bg Remove',
     },
-    {
-        id: 7,
-        href: '/image-generate',
-        icon: ArrowDownTrayIcon,
-        ariaLabel: 'AI Image Generator'
-    }
+    // {
+    //     id: 7,
+    //     href: '/image-generate',
+    //     icon: ArrowDownTrayIcon,
+    //     ariaLabel: 'AI Image Generator'
+    // }
 
 ];
 

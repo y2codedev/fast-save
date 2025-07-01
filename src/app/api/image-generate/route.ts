@@ -24,17 +24,16 @@ export async function POST(request: Request) {
       );
     }
 
-    // Enhanced prompt template for corporate events
     const enhancedPrompt = `Professional corporate foundation day celebration showing:
-${prompt}
-- Diverse team of employees celebrating
-- Company branding visible
-- High-quality photorealistic style
-- 8K resolution, cinematic lighting`;
+    ${prompt}
+    - Diverse team of employees celebrating
+    - Company branding visible
+    - High-quality photorealistic style
+    - 8K resolution, cinematic lighting`;
 
     const imageUrl = await callRapidAPI(enhancedPrompt);
-    
-    return NextResponse.json({ 
+
+    return NextResponse.json({
       imageUrl,
       service: "rapidapi"
     }, { status: 200 });
@@ -42,7 +41,7 @@ ${prompt}
   } catch (error: any) {
     console.error("API Error:", error);
     return NextResponse.json(
-      { 
+      {
         error: error.message || "Image generation failed",
         details: error.response?.data || null
       },
@@ -51,7 +50,7 @@ ${prompt}
   }
 }
 
-// Helper function for RapidAPI call
+
 function callRapidAPI(prompt: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const req = https.request(rapidApiOptions, (res) => {
