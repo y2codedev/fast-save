@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 import { FiUpload, FiMusic, FiDownload, FiPlay, FiPause } from "react-icons/fi";
+import AudioLoader from "../ui/audioLoader";
 
 function VideoToAudioConverter() {
   const ffmpegRef = useRef(new FFmpeg());
@@ -218,14 +219,17 @@ function VideoToAudioConverter() {
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl">
-            <div className="p-6 sm:p-8">
-              <h2 className="sm:text-2xl text-sm font-bold text-gray-800 dark:text-white mb-6 flex items-center">
-                <FiMusic className="mr-2" /> Music Player
-              </h2>
-
-              <div className="mb-8">
+            <div className="p-4 sm:p-8">
+              <div className="flex items-center justify-between pb-5 ">
+                <span className="flex items-center gap-2">
+                  <FiMusic className="mr-2" />
+                  <span>  Music Player</span>
+                </span>
+                {isPlaying && <span><AudioLoader /></span>}
+              </div>
+              <div className="mb-6">
                 {albumArt ? (
-                  <div className="relative aspect-square w-full  mx-auto rounded-xl overflow-hidden shadow-lg">
+                  <div className="relative aspect-square w-full h-80  mx-auto rounded-xl overflow-hidden shadow-lg">
                     <Image
                       src={albumArt || "https://a10.gaanacdn.com/gn_img/albums/10q3Zj1352/q3ZRBOA235/size_l_1684418170.webp"}
                       alt="Album art"
