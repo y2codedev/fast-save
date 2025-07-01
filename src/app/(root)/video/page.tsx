@@ -124,7 +124,7 @@ export default function SocialMediaDownloader() {
           <div className="mt-6 bg-transparent dark:bg-transparent rounded-xl overflow-hidden">
             <div className="p-4">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Media Preview</h3>
-              <div className="flex flex-col md:flex-row gap-6 mb-6">
+              <div className="flex flex-col md:flex-row gap-6">
                 <div className="relative w-full md:w-1/3 aspect-square rounded-lg overflow-hidden">
                   {result?.thumbnail ? (
                     <Image
@@ -141,7 +141,7 @@ export default function SocialMediaDownloader() {
                   )}
                 </div>
 
-                <div className="flex-1 space-y-4">
+                <div className="flex-1  space-y-4">
                   <div>
                     <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">Title</h4>
                     <p className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2">
@@ -172,14 +172,16 @@ export default function SocialMediaDownloader() {
               {result.medias[0] && (
                 <div className="mb-6">
                   <div className="rounded-xl overflow-hidden bg-gray-50 dark:bg-gray-800/50 p-4">
-                    {result.medias[0].type === 'video' && (
-                      <video
-                        controls
-                        className="w-full rounded-lg mb-4"
-                        src={result.medias[0].url}
-                        poster={result.thumbnail}
-                      />
-                    )}
+                    <div className="w-full  h-96">
+                      {result.medias[0].type === 'video' && (
+                        <video
+                          controls
+                          className="w-full h-full rounded-lg object-cover mb-4"
+                          src={result.medias[0].url}
+                          poster={result.thumbnail}
+                        />
+                      )}
+                    </div>
 
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                       <div className="space-y-1">
@@ -202,12 +204,14 @@ export default function SocialMediaDownloader() {
                         </div>
                       </div>
 
-                      <Button
-                        onClick={() => handleDownload(result.medias[0].url)}
-                        isProcessing={isSaving}
-                        labal='Download'
-                        icon={true}
-                      />
+                      <div className='mt-4'>
+                        <Button
+                          onClick={() => handleDownload(result.medias[0].url)}
+                          isProcessing={isSaving}
+                          labal='Download'
+                          icon={true}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

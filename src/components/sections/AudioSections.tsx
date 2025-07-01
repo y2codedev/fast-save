@@ -155,7 +155,7 @@ function VideoToAudioConverter() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="bg-white dark:bg-gray-800 h-fit rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl">
-            <div className="p-6 sm:p-8 ">
+            <div className="p-4 sm:p-8 ">
               <h2 className="sm:text-2xl text-sm font-bold text-gray-800 dark:text-white mb-6 flex items-center">
                 <FiUpload className="mr-2" /> Upload & Convert
               </h2>
@@ -193,7 +193,7 @@ function VideoToAudioConverter() {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8">
+              <div className="flex  sm:flex-row items-center justify-between  mt-8">
                 <div className="w-full sm:w-auto">
                   <Button
                     onClick={convertToAudio}
@@ -206,7 +206,7 @@ function VideoToAudioConverter() {
                   <a
                     href={audioURL}
                     download="converted-audio.mp3"
-                    className="flex items-center  px-4 py-2  text-sm font-medium rounded-[8px] text-white bg-indigo-600 hover:bg-indigo-700"
+                    className="flex items-center  px-2 py-2  border border-transparent text-sm font-medium rounded-[8px] text-white bg-indigo-600 hover:bg-indigo-700"
                   >
                     <FiDownload className="mr-1" /> Download
                   </a>
@@ -227,7 +227,7 @@ function VideoToAudioConverter() {
                 {albumArt ? (
                   <div className="relative aspect-square w-full  mx-auto rounded-xl overflow-hidden shadow-lg">
                     <Image
-                      src={albumArt}
+                      src={albumArt || "https://a10.gaanacdn.com/gn_img/albums/10q3Zj1352/q3ZRBOA235/size_l_1684418170.webp"}
                       alt="Album art"
                       fill
                       quality={100}
