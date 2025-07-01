@@ -147,8 +147,8 @@ function VideoToAudioConverter() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Video to Audio Converter</h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300">
+          <h1 className="sm:text-4xl text-xl  font-bold text-gray-900 dark:text-white mb-2">Video to Audio Converter</h1>
+          <p className="  text-sm sm:text-sm  text-gray-600 dark:text-gray-300">
             Convert your videos to high-quality MP3 files with embedded metadata
           </p>
         </div>
@@ -156,12 +156,12 @@ function VideoToAudioConverter() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="bg-white dark:bg-gray-800 h-fit rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl">
             <div className="p-6 sm:p-8 ">
-              <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center">
+              <h2 className="sm:text-2xl text-sm font-bold text-gray-800 dark:text-white mb-6 flex items-center">
                 <FiUpload className="mr-2" /> Upload & Convert
               </h2>
 
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                <label className="block sm:text-sm text-xs font-medium text-gray-700 dark:text-gray-300 mb-3">
                   Select Video File
                 </label>
                 <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-10 text-center transition-all duration-200 hover:border-indigo-500 dark:hover:border-indigo-400 bg-gray-50 dark:bg-gray-700/50">
@@ -219,7 +219,7 @@ function VideoToAudioConverter() {
 
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl">
             <div className="p-6 sm:p-8">
-              <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center">
+              <h2 className="sm:text-2xl text-sm font-bold text-gray-800 dark:text-white mb-6 flex items-center">
                 <FiMusic className="mr-2" /> Music Player
               </h2>
 
@@ -281,13 +281,13 @@ function VideoToAudioConverter() {
               )}
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3 flex items-center">
+                <h3 className="sm:text-lg text-sm font-semibold text-gray-800 dark:text-white mb-3 flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
                   </svg>
                   Lyrics
                 </h3>
-                <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 h-48 overflow-y-auto">
+                <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 h-fit overflow-y-auto">
                   <pre className="font-sans text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
                     {lyrics}
                   </pre>
@@ -297,11 +297,11 @@ function VideoToAudioConverter() {
           </div>
         </div>
 
-        {/* Status Message */}
+
         {messageRef.current && (
           <p
             ref={messageRef}
-            className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400 italic"
+            className="mt-6  text-center text-sm text-gray-500 dark:text-gray-400 italic"
           />
         )}
 
