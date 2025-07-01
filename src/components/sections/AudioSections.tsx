@@ -257,9 +257,9 @@ function VideoToAudioConverter() {
                       className="p-4 rounded-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-600 text-white shadow-lg transform transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       {isPlaying ? (
-                        <FiPause size={28} className="flex-shrink-0" />
+                        <FiPause size={25} className="flex-shrink-0 " />
                       ) : (
-                        <FiPlay size={28} className="flex-shrink-0 ml-1" />
+                        <FiPlay size={25} className="flex-shrink-0 " />
                       )}
                     </button>
                   </div>
