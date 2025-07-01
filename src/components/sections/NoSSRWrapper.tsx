@@ -4,13 +4,13 @@ import dynamic from 'next/dynamic'
 import React, { ReactNode } from 'react'
 
 type Props = {
-  children: ReactNode
+    children: ReactNode
 }
 
 const NoSSRWrapper = (props: Props) => (
-  <React.Fragment>{props.children}</React.Fragment>
+    <React.Fragment>{props.children}</React.Fragment>
 )
 
 export default dynamic(() => Promise.resolve(NoSSRWrapper), {
-  ssr: false
+    ssr: false
 })

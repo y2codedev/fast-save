@@ -75,7 +75,7 @@ const useBackgroundRemover = () => {
             Toast('success', 'Background removed successfully!');
         } catch (error) {
             console.error('Background removal failed:', error);
-            Toast("error", error instanceof Error ? error.message : 'Failed to remove background');
+            Toast("error", 'You have exceeded the MONTHLY quota');
         } finally {
             setIsProcessing(false);
         }

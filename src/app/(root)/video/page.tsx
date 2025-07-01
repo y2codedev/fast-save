@@ -66,6 +66,8 @@ export default function SocialMediaDownloader() {
   };
 
   const handleDownload = async (downloadUrl: string) => {
+    console.log(downloadUrl, "downloadUrl");
+
     setIsSaving(true);
     try {
       const response = await fetch(downloadUrl, {
@@ -111,11 +113,11 @@ export default function SocialMediaDownloader() {
         />
 
         <div className='mt-4'>
-          <Button 
-          onClick={fetchMedia}
-          isProcessing={loading}
-          labal='Get Media'
-        />
+          <Button
+            onClick={fetchMedia}
+            isProcessing={loading}
+            labal='Get Media'
+          />
         </div>
 
         {result && (
@@ -167,14 +169,14 @@ export default function SocialMediaDownloader() {
                 </div>
               </div>
 
-              {result.medias.map((item, index) => (
-                <div key={index} className="mb-6">
+              {result.medias[0] && (
+                <div className="mb-6">
                   <div className="rounded-xl overflow-hidden bg-gray-50 dark:bg-gray-800/50 p-4">
-                    {item.type === 'video' && (
+                    {result.medias[0].type === 'video' && (
                       <video
                         controls
                         className="w-full rounded-lg mb-4"
-                        src={item.url}
+                        src={result.medias[0].url}
                         poster={result.thumbnail}
                       />
                     )}
@@ -182,26 +184,26 @@ export default function SocialMediaDownloader() {
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                       <div className="space-y-1">
                         <h4 className="font-medium text-gray-900 dark:text-white">
-                          {item.label || `Quality ${index + 1}`}
+                          {result.medias[0].label || `Quality`}
                         </h4>
                         <div className="flex flex-wrap gap-2 text-sm text-gray-500 dark:text-gray-400">
-                          {item.width && item.height && (
-                            <span>{item.width}x{item.height}</span>
+                          {result.medias[0].width && result.medias[0].height && (
+                            <span>{result.medias[0].width}x{result.medias[0].height}</span>
                           )}
-                          {item.bitrate && (
-                            <span>{Math.round(item.bitrate / 1000)}kbps</span>
+                          {result.medias[0].bitrate && (
+                            <span>{Math.round(result.medias[0].bitrate / 1000)}kbps</span>
                           )}
-                          {item.fps && (
-                            <span>{item.fps}fps</span>
+                          {result.medias[0].fps && (
+                            <span>{result.medias[0].fps}fps</span>
                           )}
-                          {item.ext && (
-                            <span className="uppercase">{item.ext}</span>
+                          {result.medias[0].ext && (
+                            <span className="uppercase">{result.medias[0].ext}</span>
                           )}
                         </div>
                       </div>
 
                       <Button
-                        onClick={() => handleDownload(item.url)}
+                        onClick={() => handleDownload(result.medias[0].url)}
                         isProcessing={isSaving}
                         labal='Download'
                         icon={true}
@@ -209,9 +211,8 @@ export default function SocialMediaDownloader() {
                     </div>
                   </div>
                 </div>
-              ))}
+              )}
             </div>
-
             <div className="px-4 py-3 border-t border-gray-200 dark:border-gray-700 text-xs text-gray-500 dark:text-gray-400">
               <p>Platform: {result.platform}</p>
               <p className="mt-1">Note: Downloaded content is for personal use only. Respect copyright laws.</p>

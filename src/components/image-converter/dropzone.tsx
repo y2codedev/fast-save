@@ -22,11 +22,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from  "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import loadFfmpeg from "@/utils/load-ffmpeg";
 import type { Action } from "@/constants/types";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
-import { Toast } from "@/constants";
+import { Loader, Toast } from "@/constants";
 
 const extensions = {
   image: [
@@ -133,12 +133,12 @@ export default function Dropzone() {
         tmp_actions = tmp_actions.map((elt) =>
           elt === action
             ? {
-                ...elt,
-                is_converted: true,
-                is_converting: false,
-                url,
-                output,
-              }
+              ...elt,
+              is_converted: true,
+              is_converting: false,
+              url,
+              output,
+            }
             : elt
         );
         setActions(tmp_actions);
@@ -146,11 +146,11 @@ export default function Dropzone() {
         tmp_actions = tmp_actions.map((elt) =>
           elt === action
             ? {
-                ...elt,
-                is_converted: false,
-                is_converting: false,
-                is_error: true,
-              }
+              ...elt,
+              is_converted: false,
+              is_converting: false,
+              is_error: true,
+            }
             : elt
         );
         setActions(tmp_actions);
@@ -263,15 +263,14 @@ export default function Dropzone() {
             ) : action.is_converting ? (
               <Badge variant="default" className="flex gap-2">
                 <span>Converting</span>
-                <span className="animate-spin">
-                  <ImSpinner3 />
-                </span>
+                <Loader />
               </Badge>
             ) : (
               <div className="text-muted-foreground text-md flex items-center gap-4">
                 <span>Convert to</span>
-                <Select
-                  onValueChange={(value:any) => {
+                <select
+                  onChange={(e) => {
+                    const value = e.target.value;
                     if (extensions.audio.includes(value)) {
                       setDefaultValues("audio");
                     } else if (extensions.video.includes(value)) {
@@ -281,69 +280,43 @@ export default function Dropzone() {
                     updateAction(action.file_name, value);
                   }}
                   value={selcted}
+                  className="w-32 px-3 py-1 rounded-md border bg-white text-gray-900 border-gray-300 bg-background text-muted-foreground text-sm font-medium focus:outline-none "
                 >
-                  <SelectTrigger className="w-32 outline-none focus:outline-none focus:ring-0 text-center text-muted-foreground bg-background text-md font-medium">
-                    <SelectValue placeholder="..." />
-                  </SelectTrigger>
-                  <SelectContent className="h-fit">
-                    {action.file_type.includes("image") && (
-                      <div className="grid grid-cols-2 gap-2 w-fit">
-                        {extensions.image.map((elt, i) => (
-                          <div key={i} className="col-span-1 text-center">
-                            <SelectItem value={elt} className="mx-auto">
-                              {elt}
-                            </SelectItem>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {action.file_type.includes("video") && (
-                      <Tabs defaultValue={defaultValues} className="w-full">
-                        <TabsList className="w-full">
-                          <TabsTrigger value="video" className="w-full">
-                            Video
-                          </TabsTrigger>
-                          <TabsTrigger value="audio" className="w-full">
-                            Audio
-                          </TabsTrigger>
-                        </TabsList>
-                        <TabsContent value="video">
-                          <div className="grid grid-cols-3 gap-2 w-fit">
-                            {extensions.video.map((elt, i) => (
-                              <div key={i} className="col-span-1 text-center">
-                                <SelectItem value={elt} className="mx-auto">
-                                  {elt}
-                                </SelectItem>
-                              </div>
-                            ))}
-                          </div>
-                        </TabsContent>
-                        <TabsContent value="audio">
-                          <div className="grid grid-cols-3 gap-2 w-fit">
-                            {extensions.audio.map((elt, i) => (
-                              <div key={i} className="col-span-1 text-center">
-                                <SelectItem value={elt} className="mx-auto">
-                                  {elt}
-                                </SelectItem>
-                              </div>
-                            ))}
-                          </div>
-                        </TabsContent>
-                      </Tabs>
-                    )}
-                    {action.file_type.includes("audio") && (
-                      <div className="grid grid-cols-2 gap-2 w-fit">
-                        {extensions.audio.map((elt, i) => (
-                          <div key={i} className="col-span-1 text-center">
-                            <SelectItem value={elt} className="mx-auto">
-                              {elt}
-                            </SelectItem>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </SelectContent>
-                </Select>
+                  <option value="" disabled className="rounded-md">
+                    ...
+                  </option>
+
+                  {action.file_type.includes("image") &&
+                    extensions.image.map((elt, i) => (
+                      <option key={`img-${i}`} value={elt} className="rounded-md">
+                        {elt}
+                      </option>
+                    ))}
+
+                  {action.file_type.includes("video") &&
+                    defaultValues === "video" &&
+                    extensions.video.map((elt, i) => (
+                      <option key={`vid-${i}`} value={elt} className="rounded-md">
+                        {elt}
+                      </option>
+                    ))}
+
+                  {action.file_type.includes("video") &&
+                    defaultValues === "audio" &&
+                    extensions.audio.map((elt, i) => (
+                      <option key={`aud-from-vid-${i}`} value={elt} className="rounded-md">
+                        {elt}
+                      </option>
+                    ))}
+
+                  {action.file_type.includes("audio") &&
+                    extensions.audio.map((elt, i) => (
+                      <option key={`aud-${i}`} value={elt} className="rounded-md">
+                        {elt}
+                      </option>
+                    ))}
+                </select>
+
               </div>
             )}
 
@@ -368,7 +341,7 @@ export default function Dropzone() {
                 size="lg"
                 onClick={reset}
                 variant="outline"
-                className="rounded-xl"
+                className="rounded-xl "
               >
                 Convert Another File(s)
               </Button>
@@ -381,9 +354,7 @@ export default function Dropzone() {
               onClick={convert}
             >
               {is_converting ? (
-                <span className="animate-spin text-lg">
-                  <ImSpinner3 />
-                </span>
+                <Loader />
               ) : (
                 <span className="px-3 cursor-pointer py-2 border border-transparent text-xs font-medium rounded-[8px] text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed">Convert Now</span>
               )}
@@ -402,11 +373,11 @@ export default function Dropzone() {
       accept={accepted_files}
       onDropRejected={() => {
         handleExitHover();
-        Toast("error","Error uploading your file(s)")
+        Toast("error", "Error uploading your file(s)")
       }}
       onError={() => {
         handleExitHover();
-       Toast("error","Error uploading your file(s)")
+        Toast("error", "Error uploading your file(s)")
       }}
     >
       {({ getRootProps, getInputProps }) => (
@@ -430,7 +401,7 @@ export default function Dropzone() {
                 <div className="justify-center flex text-6xl">
                   <FiUploadCloud />
                 </div>
-                <h3 className="text-center font-medium text-2xl">
+                <h3 className="text-center font-medium text-xs sm:text-2xl">
                   Click, or drop your files here
                 </h3>
               </>
