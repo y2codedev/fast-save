@@ -56,6 +56,7 @@ const useBackgroundRemover = () => {
                     method: 'POST',
                     headers,
                     body,
+                    cache:"no-store"
                 }
             );
 

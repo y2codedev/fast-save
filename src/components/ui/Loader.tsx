@@ -1,10 +1,10 @@
 import React from 'react';
-import { ImSpinner3 } from 'react-icons/im';
+import { BiLoader } from "react-icons/bi";
 
 const Loader = () => {
     return (
         <span className="animate-spin">
-            <ImSpinner3 size={18} />
+            <BiLoader size={18} />
         </span>
     );
 };

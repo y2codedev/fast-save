@@ -373,35 +373,37 @@ export default function Dropzone() {
       accept={accepted_files}
       onDropRejected={() => {
         handleExitHover();
-        Toast("error", "Error uploading your file(s)")
+        Toast("error", "Error uploading your file(s)");
       }}
       onError={() => {
         handleExitHover();
-        Toast("error", "Error uploading your file(s)")
+        Toast("error", "Error uploading your file(s)");
       }}
     >
       {({ getRootProps, getInputProps }) => (
         <div
           {...getRootProps()}
-          className=" bg-background h-72 lg:h-80 xl:h-96 rounded-3xl shadow-sm border-secondary border-2 border-dashed cursor-pointer flex items-center justify-center"
+          className="bg-background h-72 lg:h-80 xl:h-96 rounded-3xl shadow-sm border-secondary border-2 border-dashed cursor-pointer flex items-center justify-center overflow-hidden"
+          style={{ maxHeight: '100vh' }}
         >
-          <input {...getInputProps()} />
-          <div className="space-y-4 text-foreground">
+          <input
+            {...getInputProps()}
+            style={{ display: 'none' }}
+          />
+          <div className="space-y-4 text-foreground text-center">
             {is_hover ? (
               <>
-                <div className="justify-center flex text-6xl">
+                <div className="flex justify-center text-6xl">
                   <LuFileSymlink />
                 </div>
-                <h3 className="text-center font-medium text-2xl">
-                  Yes, right there
-                </h3>
+                <h3 className="font-medium text-2xl">Yes, right there</h3>
               </>
             ) : (
               <>
-                <div className="justify-center flex text-6xl">
+                <div className="flex justify-center text-6xl">
                   <FiUploadCloud />
                 </div>
-                <h3 className="text-center font-medium text-xs sm:text-2xl">
+                <h3 className="font-medium text-xs sm:text-2xl">
                   Click, or drop your files here
                 </h3>
               </>
@@ -410,5 +412,6 @@ export default function Dropzone() {
         </div>
       )}
     </ReactDropzone>
+
   );
 }

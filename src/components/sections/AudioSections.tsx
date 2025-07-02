@@ -145,7 +145,7 @@ function VideoToAudioConverter() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-900 pt-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-10">
           <h1 className="sm:text-4xl text-xl  font-bold text-gray-900 dark:text-white mb-2">Video to Audio Converter</h1>
@@ -194,7 +194,7 @@ function VideoToAudioConverter() {
                 </div>
               </div>
 
-              <div className="flex  sm:flex-row items-center justify-between  mt-8">
+              <div className="flex  sm:flex-row items-center justify-between ">
                 <div className="w-full sm:w-auto">
                   <Button
                     onClick={convertToAudio}
@@ -243,7 +243,7 @@ function VideoToAudioConverter() {
                     </div>
                   </div>
                 ) : (
-                  <div className="aspect-square w-full  mx-auto rounded-xl bg-white dark:bg-gray-800 flex items-center justify-center">
+                  <div className="aspect-square w-full h-full  mx-auto rounded-xl bg-white dark:bg-gray-800 flex items-center justify-center">
                     <FiMusic className="text-6xl text-gray-400 dark:text-gray-500" />
                   </div>
                 )}
