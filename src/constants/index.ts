@@ -18,8 +18,10 @@ import usePinterestDownloader from '@/hooks/usePinterestDownloader';
 import useBackgroundRemover from '@/hooks/useBackgroundRemover';
 import InputField from '@/components/sections/InputField';
 import ShareDialog from '@/components/ui/ShareDialog';
-
-
+import AudioLoader from "@/components/ui/AudioLoader";
+import { FileUploader } from "@/components/sections/FileUploader";
+import { AudioPlayer } from "@/components/sections/AudioPlayer";
+import { LyricsDisplay } from "@/components/sections/LyricsDisplay";
 
 export type { SocialLink, LegalLink, FooterProps } from './types';
 export { DEFAULT_SOCIAL_LINKS, DEFAULT_LEGAL_LINKS, FEATURES } from './data';
@@ -43,5 +45,9 @@ export {
     InputField,
     usePinterestDownloader,
     useBackgroundRemover,
-    ShareDialog
+    ShareDialog,
+    AudioLoader,
+    FileUploader,
+    AudioPlayer,
+    LyricsDisplay,
 };

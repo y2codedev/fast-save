@@ -88,38 +88,49 @@ export interface SocialMediaResponse {
 }
 
 export type Action = {
-  file: any;
-  file_name: string;
-  file_size: number;
-  from: string;
-  to: String | null;
-  file_type: string;
-  is_converting?: boolean;
-  is_converted?: boolean;
-  is_error?: boolean;
-  url?: any;
-  output?: any;
+    file: any;
+    file_name: string;
+    file_size: number;
+    from: string;
+    to: String | null;
+    file_type: string;
+    is_converting?: boolean;
+    is_converted?: boolean;
+    is_error?: boolean;
+    url?: any;
+    output?: any;
 };
 
 
 export interface ImageKitUploadResponse {
-  fileId: string;
-  name: string;
-  size: number;
-  versionInfo: {
-    id: string;
+    fileId: string;
     name: string;
-  };
-  filePath: string;
-  url: string;
-  fileType: string;
-  height: number;
-  width: number;
-  thumbnailUrl: string;
-  AITags: null | any[];
+    size: number;
+    versionInfo: {
+        id: string;
+        name: string;
+    };
+    filePath: string;
+    url: string;
+    fileType: string;
+    height: number;
+    width: number;
+    thumbnailUrl: string;
+    AITags: null | any[];
 }
 
 export interface BackgroundRemoverProps {
-  apiKey?: string; 
-  endpoint?: string;
+    apiKey?: string;
+    endpoint?: string;
+}
+
+export interface AudioPlayerProps {
+    audioURL: string | null;
+    isPlaying: boolean;
+    currentTime: number;
+    duration: number;
+    togglePlayback: () => void;
+    handleSeek: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    albumArt: string | null;
+    videoFile: File | null;
 }
