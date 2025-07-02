@@ -45,9 +45,6 @@ export default function GenerateForm() {
 
     return (
         <div className="w-full  p-6 rounded-xl shadow-lg bg-white dark:bg-gray-800 transition-colors duration-300">
-            <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">
-                Generate AI Art
-            </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                     <label
@@ -61,7 +58,7 @@ export default function GenerateForm() {
                         value={prompt}
                         onChange={(e) => setPrompt(e.target.value)}
                         rows={4}
-                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300 transition-colors duration-300"
+                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg  bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300 transition-colors duration-300"
                         placeholder="A futuristic city at night, cyberpunk style..."
                     />
                 </div>
