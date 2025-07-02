@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Button from './Button';
+import { Toast } from '@/constants';
 
 export default function GenerateForm() {
     const [prompt, setPrompt] = useState('');
@@ -43,6 +44,11 @@ export default function GenerateForm() {
         }
     };
 
+    if (error) {
+        Toast("error", error)
+        return
+    }
+
     return (
         <div className="w-full  p-6 rounded-xl shadow-lg bg-white dark:bg-gray-800 transition-colors duration-300">
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -62,10 +68,6 @@ export default function GenerateForm() {
                         placeholder="A futuristic city at night, cyberpunk style..."
                     />
                 </div>
-
-                {error && (
-                    <div className="text-red-500 text-sm dark:text-red-400">{error}</div>
-                )}
 
                 <Button
                     isProcessing={isGenerating}

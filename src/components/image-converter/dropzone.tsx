@@ -383,7 +383,7 @@ export default function Dropzone() {
       {({ getRootProps, getInputProps }) => (
         <div
           {...getRootProps()}
-          className="bg-background h-72 lg:h-80 xl:h-96 rounded-3xl shadow-sm border-secondary border-2 border-dashed cursor-pointer flex items-center justify-center overflow-hidden"
+          className="bg-background h-72 lg:h-80 xl:h-96 border-2 border-dashed dark:hover:border-indigo-600 hover:border-indigo-600 border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer bg-gray-50 dark:bg-gray-800 transition-colors flex items-center justify-center overflow-hidden"
           style={{ maxHeight: '100vh' }}
         >
           <input
@@ -400,12 +400,13 @@ export default function Dropzone() {
               </>
             ) : (
               <>
-                <div className="flex justify-center text-6xl">
+                <div className="flex justify-center text-6xl text-gray-400">
                   <FiUploadCloud />
                 </div>
-                <h3 className="font-medium text-xs sm:text-2xl">
-                  Click, or drop your files here
-                </h3>
+                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                  <span className="font-semibold">Click to upload</span> or drag and drop
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">PNG or JPG (MAX. 5MB)</p>
               </>
             )}
           </div>

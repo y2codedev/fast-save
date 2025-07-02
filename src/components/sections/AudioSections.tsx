@@ -187,7 +187,7 @@ function VideoToAudioConverter() {
               />
 
               <LyricsDisplay lyrics={lyrics} />
-              
+
             </div>
           </div>
         </div>
@@ -199,7 +199,7 @@ function VideoToAudioConverter() {
           />
         )}
 
-        <div className="mt-8 sm:mt-12 text-center text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+        <div className="py-8 sm:mt-12 text-center text-xs sm:text-sm text-gray-500 dark:text-gray-400">
           <p>Note: Conversion happens in your browser. Your files are never uploaded to any server.</p>
         </div>
       </div>

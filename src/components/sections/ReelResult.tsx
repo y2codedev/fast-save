@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Toast } from '@/constants';
+import { Button } from '@/constants';
 import { ReelResultProps } from '@/constants/types';
 import Image from 'next/image';
 
