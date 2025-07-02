@@ -23,12 +23,11 @@ const Footer = ({
             </p>
           </div>
 
-          <div className="mt-6 flex justify-center md:mt-0 md:justify-end space-x-6">
+          <div className="mt-6 flex flex-wrap justify-center gap-4 md:gap-6">
             {socialLinks?.map((social) => (
               <Link
                 key={social?.id}
                 href={social?.href}
-                target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-600 transition-colors duration-200"
                 aria-label={social?.ariaLabel}

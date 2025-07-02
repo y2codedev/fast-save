@@ -28,27 +28,51 @@ import { HiLightningBolt } from 'react-icons/hi';
 export const DEFAULT_SOCIAL_LINKS: SocialLink[] = [
     {
         id: 1,
-        href: 'https://github.com',
-        icon: FiGithub,
-        ariaLabel: 'GitHub profile'
+        href: '/',
+        icon: FiInstagram,
+        ariaLabel: 'Instagram profile'
     },
     {
         id: 2,
-        href: 'https://twitter.com',
-        icon: FiTwitter,
-        ariaLabel: 'Twitter profile'
+        href: '/pinterest',
+        icon: RectangleStackIcon,
+        ariaLabel: 'Pinterest',
     },
     {
         id: 3,
-        href: 'https://linkedin.com',
-        icon: FiLinkedin,
-        ariaLabel: 'LinkedIn profile'
+        href: '/video',
+        icon: PlayCircleIcon,
+        ariaLabel: 'Video',
     },
     {
         id: 4,
-        href: 'https://instagram.com',
-        icon: FiInstagram,
-        ariaLabel: 'Instagram profile'
+        href: '/audio',
+        icon: SpeakerWaveIcon,
+        ariaLabel: 'Audio',
+    },
+    {
+        id: 5,
+        href: '/photo',
+        icon: PhotoIcon,
+        ariaLabel: 'Photo',
+    },
+    {
+        id: 6,
+        href: '/fb-video',
+        icon: PlayCircleIcon,
+        ariaLabel: 'FB Video',
+    },
+    {
+        id: 7,
+        href: '/bg-remover',
+        icon: ScissorsIcon,
+        ariaLabel: 'Bg Remove',
+    },
+    {
+        id: 8,
+        href: '/image-generate',
+        icon: ArrowDownTrayIcon,
+        ariaLabel: 'AI Image Generator'
     }
 ];
 
@@ -194,12 +218,12 @@ export const NAVITEMS: SocialLink[] = [
         icon: ScissorsIcon,
         ariaLabel: 'Bg Remove',
     },
-    // {
-    //     id: 7,
-    //     href: '/image-generate',
-    //     icon: ArrowDownTrayIcon,
-    //     ariaLabel: 'AI Image Generator'
-    // }
+    {
+        id: 7,
+        href: '/image-generate',
+        icon: ArrowDownTrayIcon,
+        ariaLabel: 'AI Image Generator'
+    }
 
 ];
 
