@@ -187,6 +187,7 @@ function VideoToAudioConverter() {
               />
 
               <LyricsDisplay lyrics={lyrics} />
+              
             </div>
           </div>
         </div>

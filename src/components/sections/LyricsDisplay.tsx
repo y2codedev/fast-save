@@ -9,7 +9,7 @@ export function LyricsDisplay({ lyrics }: { lyrics: string }) {
         </svg>
         Lyrics
       </h3>
-      <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 h-40 overflow-y-auto">
+      <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 h-fit overflow-y-auto">
         <pre className="font-sans text-sm sm:text-base text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
           {lyrics}
         </pre>

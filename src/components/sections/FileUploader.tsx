@@ -27,7 +27,7 @@ export function FileUploader({ videoFile, handleFileChange }: FileUploaderProps)
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             {videoFile ? (
-              <span className="font-medium text-indigo-600 dark:text-indigo-400 truncate max-w-xs">{videoFile.name}</span>
+              <span className="font-medium text-indigo-600 dark:text-indigo-400 truncate max-w-xs">{videoFile?.name?.slice(0,35)}</span>
             ) : (
               <>
                 <span className="font-medium text-gray-700 dark:text-gray-300">Drag & drop files or</span>{' '}
