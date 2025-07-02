@@ -114,10 +114,7 @@ export default function ImageToSVG() {
 
       {svg && !loading && (
         <SVGOutput
-          svg={svg}
-          showCode={showCode}
           onDownload={handleDownload}
-          onToggleCode={() => setShowCode(!showCode)}
           onCopyCode={handleCopyCode}
         />
       )}

@@ -28,6 +28,7 @@ import SVGOutput from '@/components/sections/SVGOutput';
 
 export type { SocialLink, LegalLink, FooterProps } from './types';
 export { DEFAULT_SOCIAL_LINKS, DEFAULT_LEGAL_LINKS, FEATURES } from './data';
+
 export {
     HeroSection,
     DownloadForm,
