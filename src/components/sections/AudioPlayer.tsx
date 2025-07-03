@@ -49,7 +49,7 @@ export function AudioPlayer({
                     <div className="flex items-center justify-center mb-6">
                         <button
                             onClick={togglePlayback}
-                            className="p-3 sm:p-4 rounded-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-600 text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            className="p-3 sm:p-4 rounded-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-600 text-white transition-colors duration-200 focus:outline-none "
                         >
                             {isPlaying ? (
                                 <FiPause size={20} className="sm:size-6 flex-shrink-0" />
@@ -72,7 +72,7 @@ export function AudioPlayer({
                             }}
                         />
                         <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
-                            <span>{formatTime(currentTime)}</span>
+                            <span> {formatTime(currentTime)} </span>
                             <span>{formatTime(duration)}</span>
                         </div>
                     </div>

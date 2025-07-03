@@ -2,13 +2,15 @@ import React from 'react';
 import { Button } from '@/constants';
 
 interface SVGOutputProps {
+  showCode: boolean
   onDownload: () => void;
   onCopyCode: () => void;
 }
 
 const SVGOutput: React.FC<SVGOutputProps> = ({
   onDownload,
-  onCopyCode
+  onCopyCode,
+  showCode
 }) => {
   return (
     <div className="mt-8">
@@ -23,7 +25,7 @@ const SVGOutput: React.FC<SVGOutputProps> = ({
           onClick={onCopyCode}
           className="text-sm px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg"
         >
-          Copy Code
+          {showCode ? "✅ Copyid !" : "Copy Code"}
         </button>
       </div>
     </div>
