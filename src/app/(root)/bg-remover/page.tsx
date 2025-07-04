@@ -1,9 +1,21 @@
 'use client';
 
-import { Loader2, UploadCloud, Link as LinkIcon, Image as ImageIcon } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { Button, InputField, ResetButton, Toast, useBackgroundRemover, } from '@/constants';
+import {
+  Loader2,
+  UploadCloud,
+  Link as LinkIcon,
+  Image as ImageIcon,
+} from 'lucide-react';
 import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import {
+  Button,
+  InputField,
+  ResetButton,
+  Toast,
+  useBackgroundRemover,
+} from '@/constants';
 
 const BackgroundRemover = () => {
   const {
@@ -17,30 +29,43 @@ const BackgroundRemover = () => {
     handleFileChange,
     handleUrlChange,
     removeBackground,
-    resetForm
+    resetForm,
   } = useBackgroundRemover();
 
   return (
-    <div className="bg-white dark:bg-gray-900  px-4 pt-10 ">
-      <div className="max-w-5xl mx-auto p-4 md:p-6 bg-gray-100 dark:bg-gray-800 rounded-xl ">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Background Remover</h2>
+    <div className="bg-white dark:bg-gray-900 px-4 pt-10">
+      <div className="max-w-5xl mx-auto p-4 md:p-6 bg-gray-100 dark:bg-gray-800 rounded-xl">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+          Background Remover
+        </h2>
+
+        {/* Mode Switch */}
         <div className="flex mb-6 border-b border-gray-200 dark:border-gray-700">
           <button
             onClick={() => setMode('upload')}
-            className={`flex-1 py-2 font-medium text-center ${mode === 'upload' ? 'text-indigo-600 border-b-2 border-indigo-600 dark:text-indigo-400 dark:border-indigo-400' : 'text-gray-500 dark:text-gray-400'}`}
+            className={`flex-1 py-2 font-medium text-center ${
+              mode === 'upload'
+                ? 'text-indigo-600 border-b-2 border-indigo-600 dark:text-indigo-400 dark:border-indigo-400'
+                : 'text-gray-500 dark:text-gray-400'
+            }`}
           >
             <UploadCloud className="inline-block mr-2 h-5 w-5" />
             Upload Image
           </button>
           <button
             onClick={() => setMode('url')}
-            className={`flex-1 py-2 font-medium text-center ${mode === 'url' ? 'text-indigo-600 border-b-2 border-indigo-600 dark:text-indigo-400 dark:border-indigo-400' : 'text-gray-500 dark:text-gray-400'}`}
+            className={`flex-1 py-2 font-medium text-center ${
+              mode === 'url'
+                ? 'text-indigo-600 border-b-2 border-indigo-600 dark:text-indigo-400 dark:border-indigo-400'
+                : 'text-gray-500 dark:text-gray-400'
+            }`}
           >
             <LinkIcon className="inline-block mr-2 h-5 w-5" />
             Image URL
           </button>
         </div>
 
+        {/* Input */}
         <div className="mb-6">
           {mode === 'upload' ? (
             <div className="space-y-2">
@@ -63,7 +88,9 @@ const BackgroundRemover = () => {
                   <div className="flex flex-col items-center justify-center space-y-2">
                     <UploadCloud className="h-12 w-12 text-gray-400" />
                     <span className="text-sm text-gray-600 dark:text-gray-400">
-                      {imageFile ? imageFile.name : 'Click to select an image file'}
+                      {imageFile
+                        ? imageFile.name
+                        : 'Click to select an image file'}
                     </span>
                   </div>
                 </label>
@@ -81,21 +108,27 @@ const BackgroundRemover = () => {
           )}
         </div>
 
+        {/* Images */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          {/* Original Image */}
           <div className="space-y-2">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Original</h3>
-            <div className="relative aspect-square bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+            <div className="relative w-full h-80 bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
               {(mode === 'upload' && imageFile) ? (
-                <img
+                <Image
                   src={URL.createObjectURL(imageFile)}
                   alt="Original"
-                  className="object-contain w-full h-full"
+                  fill
+                  className="object-cover"
+                  loading="lazy"
                 />
               ) : (mode === 'url' && imageUrl) ? (
-                <img
+                <Image
                   src={imageUrl}
                   alt="Original"
-                  className="object-contain w-full h-full"
+                  fill
+                  className="object-cover"
+                  loading="lazy"
                   onError={() => Toast('error', 'Failed to load image from URL')}
                 />
               ) : (
@@ -106,19 +139,23 @@ const BackgroundRemover = () => {
               )}
             </div>
           </div>
+
+          {/* Result Image */}
           <div className="space-y-2">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Result</h3>
-            <div className="relative aspect-square bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+            <div className="relative w-full h-80 bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
               {resultImage ? (
-                <img
+                <Image
                   src={resultImage}
                   alt="Background removed"
-                  className="object-contain w-full h-full"
+                  fill
+                  className="object-cover"
+                  loading="lazy"
                 />
               ) : (
                 <div className="flex flex-col items-center justify-center h-full text-gray-400">
                   {isProcessing ? (
-                    <div className='flex items-center gap-2'>
+                    <div className="flex items-center gap-2">
                       <Loader2 className="h-4 w-4 animate-spin" strokeWidth={3} />
                       <span>Processing...</span>
                     </div>
@@ -134,27 +171,30 @@ const BackgroundRemover = () => {
           </div>
         </div>
 
+        {/* Buttons */}
         <div className="flex flex-wrap gap-3">
           <Button
             onClick={removeBackground}
             isProcessing={isProcessing}
-            labal='Remove Background'
+            labal="Remove Background"
           />
 
           {(imageFile || imageUrl) && (
             <ResetButton
               onClick={resetForm}
               isProcessing={isProcessing}
-              labal='Reset'
+              labal="Reset"
             />
           )}
 
           {resultImage && (
             <Link
               href={resultImage}
+              download
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
             >
-              <ArrowDownTrayIcon className="h-5 w-5 mr-2" />  Download Result
+              <ArrowDownTrayIcon className="h-5 w-5 mr-2" />
+              Download Result
             </Link>
           )}
         </div>
@@ -163,4 +203,4 @@ const BackgroundRemover = () => {
   );
 };
 
-export default BackgroundRemover
+export default BackgroundRemover;
