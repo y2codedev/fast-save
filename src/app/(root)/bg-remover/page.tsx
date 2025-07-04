@@ -90,12 +90,11 @@ const BackgroundRemover = () => {
                 <Image
                   src={URL.createObjectURL(imageFile)}
                   alt="Original"
-                  width={400}
-                  height={400}
+                  fill
                   quality={80}
                   priority={true}
                   className="object-contain"
-                  onError={() => console.log("Image load failed", imageFile)}
+                  onError={() => console.log("Image load failed", imageUrl)}
 
                 />
               ) : (mode === 'url' && imageUrl) ? (
@@ -103,8 +102,7 @@ const BackgroundRemover = () => {
                   src={imageUrl}
                   alt="Original"
                   className="object-contain"
-                  width={400}
-                  height={400}
+                  fill
                   quality={80}
                   priority={true}
                   onError={() => console.log("Image load failed", imageUrl)}
@@ -124,8 +122,7 @@ const BackgroundRemover = () => {
                 <Image
                   src={resultImage}
                   alt="Background removed"
-                  width={400}
-                  height={400}
+                  fill
                   quality={80}
                   priority={true}
                   onError={() => console.log("Image load failed", resultImage)}
