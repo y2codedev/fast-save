@@ -10,7 +10,6 @@ const useBackgroundRemover = () => {
     const [resultImage, setResultImage] = useState('');
     const [isProcessing, setIsProcessing] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const RAPIDAPI_KEY = process.env.NEXT_PUBLIC_RAPIDAPI_KEY || '5da58acae9mshaca9e06ba0032afp175489jsn9e4219e979ab';
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -26,19 +25,14 @@ const useBackgroundRemover = () => {
     };
 
     const removeBackground = async () => {
-        if ((mode === 'upload' && !imageFile) || (mode === 'url' && !imageUrl)) {
-            Toast("error", mode === 'upload' ? 'Please select an image file' : 'Please enter a valid image URL');
-            return;
-        }
-
         setIsProcessing(true);
         setResultImage('');
 
         try {
             let body: FormData | URLSearchParams;
             const headers: Record<string, string> = {
+                'x-rapidapi-key': '9062a00978mshb7bc13dc89bbedep111a67jsned1d561f06a9',
                 'x-rapidapi-host': 'remove-background18.p.rapidapi.com',
-                'x-rapidapi-key': RAPIDAPI_KEY,
             };
 
             if (mode === 'upload' && imageFile) {
@@ -48,6 +42,7 @@ const useBackgroundRemover = () => {
                 body = new URLSearchParams();
                 body.append('image_url', imageUrl);
                 headers['Content-Type'] = 'application/x-www-form-urlencoded';
+
             }
 
             const response = await fetch(
@@ -56,7 +51,7 @@ const useBackgroundRemover = () => {
                     method: 'POST',
                     headers,
                     body,
-                    cache:"no-store"
+                    cache: "no-store"
                 }
             );
 
@@ -73,6 +68,8 @@ const useBackgroundRemover = () => {
             }
 
             setResultImage(resultUrl);
+            setImageUrl("")
+            setImageFile(null)
             Toast('success', 'Background removed successfully!');
         } catch (error) {
             console.error('Background removal failed:', error);

@@ -79,32 +79,28 @@ function VideoToAudioConverter() {
   };
 
   // Handle file change
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.[0]) {
-      const file = e.target.files[0];
-      setVideoFile(file);
-      setAudioURL(null);
-      setIsPlaying(false);
+  const handleFileChange = (file: File) => {
+    setVideoFile(file);
+    setAudioURL(null);
+    setIsPlaying(false);
 
-      // Create album art from video thumbnail
-      const video = document.createElement('video');
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+    const video = document.createElement('video');
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
 
-      video.src = URL.createObjectURL(file);
-      video.onloadedmetadata = () => {
-        video.currentTime = 1;
-      };
+    video.src = URL.createObjectURL(file);
+    video.onloadedmetadata = () => {
+      video.currentTime = 1;
+    };
 
-      video.onseeked = () => {
-        if (ctx) {
-          canvas.width = video.videoWidth;
-          canvas.height = video.videoHeight;
-          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-          setAlbumArt(canvas.toDataURL('image/jpeg'));
-        }
-      };
-    }
+    video.onseeked = () => {
+      if (ctx) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        setAlbumArt(canvas.toDataURL('image/jpeg'));
+      }
+    };
   };
 
   // Convert video to audio
@@ -134,6 +130,7 @@ function VideoToAudioConverter() {
       setIsLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-900 pt-12 px-4 sm:px-6 lg:px-8">

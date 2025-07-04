@@ -93,9 +93,6 @@ export default function ImageToSVG() {
     return
   }
 
-
-  console.log(showCode, "showCode");
-
   return (
     <div className="mx-auto bg-transparent dark:bg-gray-800">
       <h1 className="font-medium text-sm sm:text-lg text-gray-700 dark:text-gray-300 mb-6">

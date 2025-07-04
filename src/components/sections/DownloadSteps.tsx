@@ -25,7 +25,7 @@ export default function DownloadSteps() {
                                         </div>
                                         <h3 className="mt-6 text-base font-semibold leading-7 text-gray-900 dark:text-white">
                                             <span className="absolute inset-0" />
-                                            Step {step?.id + 1}: {step?.name}
+                                            Step {step?.id} : {step?.name}
                                         </h3>
                                         <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">{step?.description}</p>
                                     </div>

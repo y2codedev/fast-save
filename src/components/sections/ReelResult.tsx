@@ -70,7 +70,6 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                         </video>
                     </div>
                 )}
-
             </div>
 
             <div className=" px-4  sm:px-4 flex justify-end">
