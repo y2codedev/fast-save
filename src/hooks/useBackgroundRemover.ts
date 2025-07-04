@@ -25,6 +25,8 @@ const useBackgroundRemover = () => {
     };
 
     const removeBackground = async () => {
+
+
         setIsProcessing(true);
         setResultImage('');
 
@@ -68,8 +70,7 @@ const useBackgroundRemover = () => {
             }
 
             setResultImage(resultUrl);
-            setImageUrl("")
-            setImageFile(null)
+            
             Toast('success', 'Background removed successfully!');
         } catch (error) {
             console.error('Background removal failed:', error);
