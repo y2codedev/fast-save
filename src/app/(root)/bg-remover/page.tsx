@@ -90,19 +90,24 @@ const BackgroundRemover = () => {
                 <Image
                   src={URL.createObjectURL(imageFile)}
                   alt="Original"
-                  fill
+                  width={400}
+                  height={400}
                   quality={80}
                   priority={true}
                   className="object-contain"
+                  onError={() => console.log("Image load failed", imageFile)}
+
                 />
               ) : (mode === 'url' && imageUrl) ? (
                 <Image
                   src={imageUrl}
                   alt="Original"
                   className="object-contain"
-                  fill
+                  width={400}
+                  height={400}
                   quality={80}
                   priority={true}
+                  onError={() => console.log("Image load failed", imageUrl)}
                 />
               ) : (
                 <div className="flex flex-col items-center justify-center h-full text-gray-400">
@@ -119,9 +124,11 @@ const BackgroundRemover = () => {
                 <Image
                   src={resultImage}
                   alt="Background removed"
-                  fill
+                  width={400}
+                  height={400}
                   quality={80}
                   priority={true}
+                  onError={() => console.log("Image load failed", resultImage)}
                 />
               ) : (
                 <div className="flex flex-col items-center justify-center h-full text-gray-400">
