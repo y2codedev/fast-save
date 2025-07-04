@@ -12,6 +12,7 @@ import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import {
   Button,
   InputField,
+  Loader,
   ResetButton,
   Toast,
   useBackgroundRemover,
@@ -156,7 +157,7 @@ const BackgroundRemover = () => {
                 <div className="flex flex-col items-center justify-center h-full text-gray-400">
                   {isProcessing ? (
                     <div className="flex items-center gap-2">
-                      <Loader2 className="h-4 w-4 animate-spin" strokeWidth={3} />
+                      <Loader/>
                       <span>Processing...</span>
                     </div>
                   ) : (
