@@ -4,7 +4,6 @@ import { Loader2, UploadCloud, Link as LinkIcon, Image as ImageIcon } from 'luci
 import Link from 'next/link';
 import { Button, InputField, ResetButton, Toast, useBackgroundRemover, } from '@/constants';
 import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
-import Image from 'next/image';
 
 const BackgroundRemover = () => {
   const {
@@ -87,30 +86,18 @@ const BackgroundRemover = () => {
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Original</h3>
             <div className="relative aspect-square bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
               {(mode === 'upload' && imageFile) ? (
-                <div className='w-full max-h-[400px]'>
-                  <Image
-                    src={URL.createObjectURL(imageFile)}
-                    alt="Original"
-                    fill
-                    quality={80}
-                    priority={true}
-                    className="object-contain"
-                    onError={() => console.log("Image load failed", imageUrl)}
-
-                  />
-                </div>
+                <img
+                  src={URL.createObjectURL(imageFile)}
+                  alt="Original"
+                  className="object-contain w-full h-full"
+                />
               ) : (mode === 'url' && imageUrl) ? (
-                <div className='w-full max-h-[400px]'>
-                  <Image
-                    src={imageUrl}
-                    alt="Original"
-                    className="object-contain"
-                    fill
-                    quality={80}
-                    priority={true}
-                    onError={() => console.log("Image load failed", imageUrl)}
-                  />
-                </div>
+                <img
+                  src={imageUrl}
+                  alt="Original"
+                  className="object-contain w-full h-full"
+                  onError={() => Toast('error', 'Failed to load image from URL')}
+                />
               ) : (
                 <div className="flex flex-col items-center justify-center h-full text-gray-400">
                   <ImageIcon className="h-12 w-12 mb-2" />
@@ -123,16 +110,11 @@ const BackgroundRemover = () => {
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Result</h3>
             <div className="relative aspect-square bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
               {resultImage ? (
-                <div className='w-full max-h-[400px]'>
-                  <Image
-                    src={resultImage}
-                    alt="Background removed"
-                    fill
-                    quality={80}
-                    priority={true}
-                    onError={() => console.log("Image load failed", resultImage)}
-                  />
-                </div>
+                <img
+                  src={resultImage}
+                  alt="Background removed"
+                  className="object-contain w-full h-full"
+                />
               ) : (
                 <div className="flex flex-col items-center justify-center h-full text-gray-400">
                   {isProcessing ? (
