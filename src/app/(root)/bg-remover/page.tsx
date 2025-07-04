@@ -4,6 +4,7 @@ import { Loader2, UploadCloud, Link as LinkIcon, Image as ImageIcon } from 'luci
 import Link from 'next/link';
 import { Button, InputField, ResetButton, Toast, useBackgroundRemover, } from '@/constants';
 import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 const BackgroundRemover = () => {
   const {
@@ -86,17 +87,22 @@ const BackgroundRemover = () => {
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Original</h3>
             <div className="relative aspect-square bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
               {(mode === 'upload' && imageFile) ? (
-                <img
+                <Image
                   src={URL.createObjectURL(imageFile)}
                   alt="Original"
-                  className="object-contain w-full h-full"
+                  fill
+                  quality={80}
+                  priority={true}
+                  className="object-contain"
                 />
               ) : (mode === 'url' && imageUrl) ? (
-                <img
+                <Image
                   src={imageUrl}
                   alt="Original"
-                  className="object-contain w-full h-full"
-                  onError={() => Toast('error', 'Failed to load image from URL')}
+                  className="object-contain"
+                  fill
+                  quality={80}
+                  priority={true}
                 />
               ) : (
                 <div className="flex flex-col items-center justify-center h-full text-gray-400">
@@ -110,10 +116,12 @@ const BackgroundRemover = () => {
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Result</h3>
             <div className="relative aspect-square bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
               {resultImage ? (
-                <img
+                <Image
                   src={resultImage}
                   alt="Background removed"
-                  className="object-contain w-full h-full"
+                  fill
+                  quality={80}
+                  priority={true}
                 />
               ) : (
                 <div className="flex flex-col items-center justify-center h-full text-gray-400">
