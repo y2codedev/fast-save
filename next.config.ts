@@ -2,8 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: false,
-  images: {
-    domains: ['impartgallery.com'],
+   images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**', 
+      },
+    ],
+    unoptimized: true, 
   },
 };
 
