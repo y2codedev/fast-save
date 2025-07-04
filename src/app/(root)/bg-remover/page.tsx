@@ -87,26 +87,30 @@ const BackgroundRemover = () => {
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Original</h3>
             <div className="relative aspect-square bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
               {(mode === 'upload' && imageFile) ? (
-                <Image
-                  src={URL.createObjectURL(imageFile)}
-                  alt="Original"
-                  fill
-                  quality={80}
-                  priority={true}
-                  className="object-contain"
-                  onError={() => console.log("Image load failed", imageUrl)}
+                <div className='w-full max-h-[400px]'>
+                  <Image
+                    src={URL.createObjectURL(imageFile)}
+                    alt="Original"
+                    fill
+                    quality={80}
+                    priority={true}
+                    className="object-contain"
+                    onError={() => console.log("Image load failed", imageUrl)}
 
-                />
+                  />
+                </div>
               ) : (mode === 'url' && imageUrl) ? (
-                <Image
-                  src={imageUrl}
-                  alt="Original"
-                  className="object-contain"
-                  fill
-                  quality={80}
-                  priority={true}
-                  onError={() => console.log("Image load failed", imageUrl)}
-                />
+                <div className='w-full max-h-[400px]'>
+                  <Image
+                    src={imageUrl}
+                    alt="Original"
+                    className="object-contain"
+                    fill
+                    quality={80}
+                    priority={true}
+                    onError={() => console.log("Image load failed", imageUrl)}
+                  />
+                </div>
               ) : (
                 <div className="flex flex-col items-center justify-center h-full text-gray-400">
                   <ImageIcon className="h-12 w-12 mb-2" />
@@ -119,14 +123,16 @@ const BackgroundRemover = () => {
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Result</h3>
             <div className="relative aspect-square bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
               {resultImage ? (
-                <Image
-                  src={resultImage}
-                  alt="Background removed"
-                  fill
-                  quality={80}
-                  priority={true}
-                  onError={() => console.log("Image load failed", resultImage)}
-                />
+                <div className='w-full max-h-[400px]'>
+                  <Image
+                    src={resultImage}
+                    alt="Background removed"
+                    fill
+                    quality={80}
+                    priority={true}
+                    onError={() => console.log("Image load failed", resultImage)}
+                  />
+                </div>
               ) : (
                 <div className="flex flex-col items-center justify-center h-full text-gray-400">
                   {isProcessing ? (
