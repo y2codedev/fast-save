@@ -88,11 +88,6 @@ export const DEFAULT_LEGAL_LINKS: LegalLink[] = [
         href: '/terms',
         label: 'Terms of Service'
     },
-    {
-        id: 3,
-        href: '/cookies',
-        label: 'Cookie Policy'
-    }
 ];
 
 export const FEATURES: Feature[] = [

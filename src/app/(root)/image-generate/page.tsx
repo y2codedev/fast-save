@@ -1,5 +1,6 @@
 import GenerateForm from '@/components/sections/GenerateForm';
 import ImageCard from '@/components/sections/ImageCard';
+import { Group } from '@/constants';
 
 export default function HomePage() {
     return (
@@ -18,6 +19,7 @@ export default function HomePage() {
                     <ImageCard />
                 </div>
             </div>
+            <Group />
         </main>
     );
 }

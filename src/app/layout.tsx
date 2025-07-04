@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Suspense } from 'react';
-import { Navbar, Footer, LegalDisclaimer, FallbackLoader, HeroSection, DownloadSteps, ThemeProviderWrapper, ToastProvider } from "@/constants";
+import { Navbar, Footer, FallbackLoader, ThemeProviderWrapper, ToastProvider } from "@/constants";
 import { Inter } from "next/font/google";
 import GA from "@/components/image-converter/GA";
 export const generateMetadata = (): Metadata => {
@@ -64,9 +64,6 @@ export default function RootLayout({
           <Suspense fallback={<FallbackLoader />}>
             {children}
           </Suspense>
-          <HeroSection />
-          <DownloadSteps />
-          <LegalDisclaimer />
           <Footer />
           <ToastProvider />
         </ThemeProviderWrapper>

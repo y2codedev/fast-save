@@ -2,6 +2,7 @@
 
 import Dropzone from '@/components/image-converter/dropzone'
 import ImageToSVG from '@/components/sections/ImageToSVG'
+import { Group } from '@/constants';
 import React, { useState } from 'react'
 
 const Page = () => {
@@ -35,6 +36,7 @@ const Page = () => {
                     <ImageToSVG />
                 )}
             </div>
+            <Group />
         </div>
     )
 }

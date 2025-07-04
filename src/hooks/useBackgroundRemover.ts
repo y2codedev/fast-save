@@ -26,15 +26,32 @@ const useBackgroundRemover = () => {
     };
 
     const removeBackground = async () => {
-        // if ((mode === 'upload' && !imageFile) || (mode === 'url' && !imageUrl)) {
-        //     Toast("error", mode === 'upload' ? 'Please select an image file' : 'Please enter a valid image URL');
-        //     return;
-        // }
+
+        const isValidImageUrl = (url: string) => {
+            try {
+                const parsedUrl = new URL(url);
+                return /\.(jpeg|jpg|png|gif|bmp|webp)$/i.test(parsedUrl.pathname);
+            } catch {
+                return false;
+            }
+        };
 
         setIsProcessing(true);
         setResultImage('');
 
         try {
+
+            if ((mode === 'upload' && !imageFile) || (mode === 'url' && !imageUrl)) {
+                Toast("error", mode === 'upload' ? 'Please select an image file' : 'Please enter a valid image URL');
+                return;
+            }
+
+            if (mode === 'url' && (!imageUrl || !isValidImageUrl(imageUrl))) {
+                Toast("error", 'Please enter a valid image URL');
+                return;
+            }
+
+
             let body: FormData | URLSearchParams;
             const headers: Record<string, string> = {
                 'x-rapidapi-host': 'remove-background18.p.rapidapi.com',
@@ -56,7 +73,7 @@ const useBackgroundRemover = () => {
                     method: 'POST',
                     headers,
                     body,
-                    cache:"no-store"
+                    cache: "no-store"
                 }
             );
 

@@ -3,7 +3,9 @@ import React from 'react'
 
 const page = () => {
     return (
-        <ComingSoonBanner />
+        <div className=' min-h-screen bg-white dark:bg-slate-900'>
+            <ComingSoonBanner />
+        </div>
     )
 }
 

@@ -10,6 +10,7 @@ import {
 import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import {
   Button,
+  Group,
   InputField,
   Loader,
   ResetButton,
@@ -123,7 +124,6 @@ const BackgroundRemover = () => {
                   fill
                   className="object-cover"
                   loading="lazy"
-                  onError={() => Toast('error', 'Failed to load image from URL')}
                 />
               ) : (
                 <div className="flex flex-col items-center justify-center h-full text-gray-400">
@@ -190,6 +190,7 @@ const BackgroundRemover = () => {
           )}
         </div>
       </div>
+      <Group />
     </div>
   );
 };

@@ -30,7 +30,6 @@ export default function GenerateForm() {
             if (!response.ok) throw new Error('Failed generation');
             const { imageUrl } = await response.json();
 
-            // Persist the generated URL
             await fetch('/api/generate-latest', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -48,13 +47,18 @@ export default function GenerateForm() {
         }
     };
 
+    if (error) {
+        Toast("error", error)
+        return
+    }
+
     return (
-        <div className="w-full p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+        <div className="w-full p-6 bg-gray-50 dark:bg-gray-800 rounded-xl">
             <form onSubmit={handleSubmit} className="space-y-4">
                 <textarea
                     id="prompt"
                     rows={4}
-                    className="w-full p-3 border rounded-lg"
+                    className="w-full p-3 border rounded-lg bg-transparent"
                     placeholder="A futuristic city at night..."
                     value={prompt}
                     onChange={e => setPrompt(e.target.value)}

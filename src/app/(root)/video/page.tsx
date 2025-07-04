@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
-import { Button, InputField, Toast } from '@/constants';
+import { Button, Group, InputField, Toast } from '@/constants';
 import { SocialMediaResponse } from '@/constants/types';
 
 export default function SocialMediaDownloader() {
@@ -224,6 +224,7 @@ export default function SocialMediaDownloader() {
           </div>
         )}
       </div>
+      <Group />
     </div>
   );
 }

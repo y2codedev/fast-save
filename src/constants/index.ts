@@ -25,6 +25,8 @@ import { LyricsDisplay } from "@/components/sections/LyricsDisplay";
 import FileUploadArea from '@/components/sections/FileUploadArea';
 import ImagePreview from '@/components/sections/ImagePreview';
 import SVGOutput from '@/components/sections/SVGOutput';
+import Group from '@/components/sections/Group'
+
 
 export type { SocialLink, LegalLink, FooterProps } from './types';
 export { DEFAULT_SOCIAL_LINKS, DEFAULT_LEGAL_LINKS, FEATURES } from './data';
@@ -56,5 +58,6 @@ export {
     LyricsDisplay,
     FileUploadArea,
     ImagePreview,
-    SVGOutput
+    SVGOutput,
+    Group
 };
