@@ -31,7 +31,9 @@ const usePinterestDownloader = () => {
     setMediaItems([]);
 
     try {
+
       const encodedUrl = encodeURIComponent(pinterestUrl);
+
       const response = await fetch(
         `https://pinterest-video-and-image-downloader.p.rapidapi.com/pinterest?url=${encodedUrl}`,
         {
