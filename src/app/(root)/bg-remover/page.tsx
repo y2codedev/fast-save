@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  Loader2,
   UploadCloud,
   Link as LinkIcon,
   Image as ImageIcon,
@@ -40,33 +39,29 @@ const BackgroundRemover = () => {
           Background Remover
         </h2>
 
-        {/* Mode Switch */}
         <div className="flex mb-6 border-b border-gray-200 dark:border-gray-700">
           <button
             onClick={() => setMode('upload')}
-            className={`flex-1 py-2 font-medium text-center ${
-              mode === 'upload'
-                ? 'text-indigo-600 border-b-2 border-indigo-600 dark:text-indigo-400 dark:border-indigo-400'
-                : 'text-gray-500 dark:text-gray-400'
-            }`}
+            className={`flex-1 py-2 font-medium text-center ${mode === 'upload'
+              ? 'text-indigo-600 border-b-2 border-indigo-600 dark:text-indigo-400 dark:border-indigo-400'
+              : 'text-gray-500 dark:text-gray-400'
+              }`}
           >
             <UploadCloud className="inline-block mr-2 h-5 w-5" />
             Upload Image
           </button>
           <button
             onClick={() => setMode('url')}
-            className={`flex-1 py-2 font-medium text-center ${
-              mode === 'url'
-                ? 'text-indigo-600 border-b-2 border-indigo-600 dark:text-indigo-400 dark:border-indigo-400'
-                : 'text-gray-500 dark:text-gray-400'
-            }`}
+            className={`flex-1 py-2 font-medium text-center ${mode === 'url'
+              ? 'text-indigo-600 border-b-2 border-indigo-600 dark:text-indigo-400 dark:border-indigo-400'
+              : 'text-gray-500 dark:text-gray-400'
+              }`}
           >
             <LinkIcon className="inline-block mr-2 h-5 w-5" />
             Image URL
           </button>
         </div>
 
-        {/* Input */}
         <div className="mb-6">
           {mode === 'upload' ? (
             <div className="space-y-2">
@@ -109,9 +104,7 @@ const BackgroundRemover = () => {
           )}
         </div>
 
-        {/* Images */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          {/* Original Image */}
           <div className="space-y-2">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Original</h3>
             <div className="relative w-full h-80 bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
@@ -141,23 +134,21 @@ const BackgroundRemover = () => {
             </div>
           </div>
 
-          {/* Result Image */}
           <div className="space-y-2">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Result</h3>
             <div className="relative w-full h-80 bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
               {resultImage ? (
-                <Image
+                <img
                   src={resultImage}
                   alt="Background removed"
-                  fill
-                  className="object-cover"
+                  className="object-cover w-full h-full"
                   loading="lazy"
                 />
               ) : (
                 <div className="flex flex-col items-center justify-center h-full text-gray-400">
                   {isProcessing ? (
                     <div className="flex items-center gap-2">
-                      <Loader/>
+                      <Loader />
                       <span>Processing...</span>
                     </div>
                   ) : (
@@ -172,7 +163,6 @@ const BackgroundRemover = () => {
           </div>
         </div>
 
-        {/* Buttons */}
         <div className="flex flex-wrap gap-3">
           <Button
             onClick={removeBackground}

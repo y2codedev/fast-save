@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Button from './Button';
@@ -15,64 +14,52 @@ export default function GenerateForm() {
         e.preventDefault();
         if (!prompt.trim()) {
             setError('Please enter a prompt');
+            Toast('error', 'Please enter a prompt');
             return;
         }
-
         setIsGenerating(true);
         setError('');
 
         try {
             const response = await fetch('/api/image-generate', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ prompt }),
             });
 
-            if (!response.ok) {
-                throw new Error('Failed to generate image');
-            }
+            if (!response.ok) throw new Error('Failed generation');
+            const { imageUrl } = await response.json();
 
+            // Persist the generated URL
+            await fetch('/api/generate-latest', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ imageUrl }),
+            });
+
+            Toast('success', 'Image generated!');
             router.refresh();
-
         } catch (err) {
-            setError('Failed to generate image. Please try again.');
             console.error(err);
+            setError('Failed to generate image');
+            Toast('error', 'Failed to generate image');
         } finally {
             setIsGenerating(false);
         }
     };
 
-    if (error) {
-        Toast("error", error)
-        return
-    }
-
     return (
-        <div className="w-full  p-6 rounded-xl shadow-lg bg-white dark:bg-gray-800 transition-colors duration-300">
+        <div className="w-full p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
             <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                    <label
-                        htmlFor="prompt"
-                        className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
-                    >
-                        Describe your vision
-                    </label>
-                    <textarea
-                        id="prompt"
-                        value={prompt}
-                        onChange={(e) => setPrompt(e.target.value)}
-                        rows={4}
-                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg  bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300 transition-colors duration-300"
-                        placeholder="A futuristic city at night, cyberpunk style..."
-                    />
-                </div>
-
-                <Button
-                    isProcessing={isGenerating}
-                    labal='Create Artwork'
+                <textarea
+                    id="prompt"
+                    rows={4}
+                    className="w-full p-3 border rounded-lg"
+                    placeholder="A futuristic city at night..."
+                    value={prompt}
+                    onChange={e => setPrompt(e.target.value)}
                 />
+                <Button isProcessing={isGenerating} labal="Create Artwork" />
             </form>
         </div>
     );
