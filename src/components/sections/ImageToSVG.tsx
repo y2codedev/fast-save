@@ -85,7 +85,7 @@ export default function ImageToSVG() {
 
     setTimeout(() => {
       setShowCode(false);
-    }, 2000);
+    }, 1000);
   }
 
   if (error) {

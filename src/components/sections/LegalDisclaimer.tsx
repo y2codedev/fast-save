@@ -38,7 +38,6 @@ export default function LegalDisclaimer() {
                   </Link>
                   .
                 </p>
-
               </div>
             </div>
           </div>

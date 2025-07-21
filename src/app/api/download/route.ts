@@ -13,7 +13,7 @@ interface ReelData {
   duration?: number;
 }
 
-export async function POST(request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
 
     const { url } = await request.json();

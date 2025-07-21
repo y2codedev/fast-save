@@ -10,18 +10,9 @@ import { useState, useEffect, useRef } from "react";
 import compressFileName from "@/utils/compress-file-name";
 import { Skeleton } from "@/components/ui/skeleton";
 import convertFile from "@/utils/convert";
-import { ImSpinner3 } from "react-icons/im";
 import { MdDone } from "react-icons/md";
 import { Badge } from "@/components/ui/badge";
 import { BiError } from "react-icons/bi";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button"
 import loadFfmpeg from "@/utils/load-ffmpeg";
 import type { Action } from "@/constants/types";
@@ -227,7 +218,7 @@ export default function Dropzone() {
   // returns
   if (actions.length) {
     return (
-      <div className="space-y-6">
+      <div>
         {actions.map((action: Action, i: any) => (
           <div
             key={i}

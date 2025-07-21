@@ -25,7 +25,7 @@ const SVGOutput: React.FC<SVGOutputProps> = ({
           onClick={onCopyCode}
           className="text-sm px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg"
         >
-          {showCode ? "✅ Copyid !" : "Copy Code"}
+          {showCode ? "Copyid" : "Copy"}
         </button>
       </div>
     </div>

@@ -20,7 +20,7 @@ export function FileUploader({ videoFile, handleFileChange }: FileUploaderProps)
     onDrop,
     multiple: false,
     accept: { 'video/*': [] },
-    maxSize: 100 * 1024 * 1024, // 100MB
+    maxSize: 100 * 1024 * 1024, 
   });
 
   return (
