@@ -1,22 +1,25 @@
-'use client';
-
 import { Button } from '@/constants';
 import { ReelResultProps } from '@/constants/types';
 import Image from 'next/image';
-
+ 
 export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultProps) {
-
+ 
     const handleDownload = async () => {
+        if (!data?.videoUrl) {
+            alert('Video URL not found. Please try again.');
+            return;
+        }
+ 
         try {
             setIsSaving(true);
-            const response = await fetch(data?.video_url);
+            const response = await fetch(data?.videoUrl);
             const blob = await response.blob();
             const blobUrl = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = blobUrl;
-            link.download = `${data.title || 'instagram-reel'}.mp4`;
+link.download = `${data.title || 'instagram-reel'}.mp4`;
             document.body.appendChild(link);
-            link.click();
+link.click();
             window.URL.revokeObjectURL(blobUrl);
             document.body.removeChild(link);
         } catch (error) {
@@ -26,7 +29,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
             setIsSaving(false);
         }
     };
-
+ 
     return (
         <div className="mt-6 bg-transparent dark:bg-transparent rounded-xl  overflow-hidden">
             <div className="p-4">
@@ -47,7 +50,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                             </div>
                         )}
                     </div>
-
+ 
                     <div className="flex-1 space-y-3">
                         <div>
                             <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">Title</h4>
@@ -57,21 +60,21 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                         </div>
                     </div>
                 </div>
-
-                {data.video_url && (
+ 
+                {data?.videoUrl && (
                     <div className="mt-4 rounded-xl overflow-hidden h-80">
                         <video
                             controls
                             className="w-full h-full object-cover rounded-lg"
                             poster={data.thumbnail}
                         >
-                            <source src={data.video_url} type="video/mp4" />
+                            <source src={data?.videoUrl} type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
                     </div>
                 )}
             </div>
-
+ 
             <div className=" px-4  sm:px-4 flex justify-end">
                 <Button
                     onClick={handleDownload}
